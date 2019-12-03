@@ -1,0 +1,26 @@
+spring:
+# 数据源基础配置
+ datasource:
+   data-username: root
+   data-password: 123456
+   driver-class-name: com.mysql.cj.jdbc.Driver
+   url: jdbc:mysql://localhost:3306/portalsite?serverTimezone=UTC
+   type: com.alibaba.druid.pool.DruidDataSource
+#数据源其他配置
+   initialSize: 5
+   minIdle: 5
+   maxActive: 20
+   maxWait: 60000
+ thymeleaf:
+   cache:
+server:
+  port: 8080
+  name: /demo
+spring.thymeleaf.prefix.classpath: /templates/
+spring.thymeleaf.suffix: .html
+spring.thymeleaf.servlet.content-type: text/html
+spring.thymeleaf.encoding: utf-8
+spring.thymeleaf.mode: LEGACYHTML5
+spring.thymeleaf.cache: false
+spring.mvc.static-path-pattern: /**
+spring.resources.static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/

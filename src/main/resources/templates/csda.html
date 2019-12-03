@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://www.csda.cn.com/csda/webPC/index.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=9">
+    <title>CSDA全国街舞执行委员会官方网站</title>
+    <link href="http://www.csda.cn.com/csda/webPC/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="./csda_files/bootstrap.min.css}" th:href="@{/csda_files/bootstrap.min.css}">
+    <link rel="stylesheet" href="./csda_files/public.css}" th:href="@{/csda_files/public.css}">
+    <link rel="stylesheet" href="./csda_files/index.css}" th:href="@{/csda_files/index.css}">
+    <link rel="stylesheet" href="./csda_files/reset.css}" th:href="@{/csda_files/reset.css}">
+    <!--[if lt IE 9]>
+    <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script th:src="@{/csda_files/jquery.min.js}"></script>
+    <script th:src="@{/csda_files/bootstrap.min.js}"></script>
+    <script th:src="@{/csda_files/global.js}"></script>
+    <script type="text/javascript">
+	    function managementLogin(){
+	    	var domainCtx = getDomainCtx();
+	    	window.open(domainCtx + "/pc-web/management/login.jsp");
+	    }
+    </script>
+</head>
+
+<body>
+<!--头部开始-->
+    <!--顶部LOGO开始-->
+    <header id="header">
+        <div class="index_header">
+            <img class="logo verti" th:src="@{/csda_files/logo.png}" >
+            <!--<a class="help verti" href="help/help.html">帮助</a>-->
+            <a class="user verti" href="javascript:void(0);" onclick="managementLogin();">管理员登录</a>
+        </div>
+    </header>
+    <!--顶部LOGO结束-->
+    <!--导航开始-->
+    <nav>
+        <div class="index_nav">
+            <ul class="nav_ul">
+                <li class="nav_li">
+                    <a class="nav_active nav_li_a" href="javascript:">首页</a>
+                </li>
+                <li class="nav_li">
+                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html">组织简介</a>
+                    <ul>
+                        <li>
+                            <a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=0">CSDA简介</a>
+                        </li>
+                        <li>
+                            <a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=1">CSDA章程</a>
+                        </li>
+                        <li>
+                            <a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=2">组织架构</a>
+                        </li>
+                        <li>
+                            <a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=3">总委会</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav_li">
+                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/notice/notice.html">官方文件</a>
+                    <ul>
+                        <li>
+                            <a href="http://www.csda.cn.com/csda/webPC/notice/notice.html?index=0">官方通知</a>
+                        </li>
+                        <li>
+                            <a href="http://www.csda.cn.com/csda/webPC/notice/notice.html?index=1">红头文件</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav_li">
+                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/rules/rules.html">规章制度</a>
+                </li>
+                <li class="nav_li">
+                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/sub_committee/sub_committee_list.html">分委会</a>
+                </li>
+                <li class="nav_li">
+                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_dynamics.html">委员会动态</a>
+                </li>
+                <li class="nav_li">
+                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html">资质查询</a>
+                    <ul>
+                        <li>
+                            <a href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html?index=0">机构查询</a>
+                        </li>
+                        <li>
+                            <a href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html?index=1">证件查询</a>
+                        </li>
+                        <li>
+                            <a href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html?index=2">证书查询</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav_li">
+                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/development_history/development_history.html">发展历程</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--导航结束-->
+<!--头部结束-->
+<!--中部开始-->
+  <main>
+      <div class="main_slide">
+          <div class="main_slide_box">
+             <!--轮播开始-->
+              <div class="index_slide">
+                  <div id="carousel-example-generic" class="carousel slide">
+                      <ol class="carousel-indicators">
+                          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="6"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="7"></li>
+                          <li data-target="#carousel-example-generic" data-slide-to="8"></li>
+                      </ol>   <div class="carousel-inner" role="listbox">  <div class="item active">
+                      <a href="http://www.csda.cn.com/csda/wx/indx/notice_content.html?articleId=2c91e8f36d51c4a8016dd3f50c4c75a1">
+                          <img th:src="@{/csda_files/df971a97-d07f-4e97-b906-e7f7f06ae3ab_微信图片_20191016174552.jpg}" alt="12月21日第三届CSDL中街联赛北京赛区报名通道开启！">
+                          <article>12月21日第三届CSDL中街联赛北京赛区报名通道开启！</article>
+                      </a>
+                  </div>
+                      <div class="item">
+                          <a href="http://www.csda.cn.com/csda/wx/indx/notice_content.html?articleId=2c91e8f36d51c4a8016deda830af1c1a">
+                              <img th:src="@{/csda_files/01860ed3-5050-4f32-b467-f7edbba25b9a_微信图片_20191021161356_1.jpg}" alt="CSDA贵州分委“走进校园”---助力扶贫活动">
+                              <article>CSDA贵州分委“走进校园”---助力扶贫活动</article>  </a>
+                      </div>
+                      <div class="item">
+                          <a href="http://www.csda.cn.com/csda/wx/indx/notice_content.html?articleId=2c91e8f36d51c4a8016dbe950ba650d6">
+                              <img th:src="@{/csda_files/bc913d07-13e8-426d-813d-cf0d376ae8c7_微信图片_20191012114121.jpg}" alt="	2019CSDA陕西分委十月扩大会议新闻报道！">
+                              <article>	2019CSDA陕西分委十月扩大会议新闻报道！</article>
+                          </a>
+                      </div>
+                      <div class="item">
+                          <a href="http://www.csda.cn.com/csda/wx/indx/notice_content.html?articleId=2c91e8f36d51c4a8016daa21135d380f">  
+                              <img th:src="@{/csda_files/711667e6-1598-44ec-8c75-0e0206a19f3b_微信图片_20191008144408_1.jpg}" alt="第三届CSDL中街联赛湖北赛区圆满落幕！">  
+                              <article>第三届CSDL中街联赛湖北赛区圆满落幕！</article>  </a>  </div>  <div class="item">  
+                          <a href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_article.html?articleId=2c91e8f36d51c4a8016d8c1d4aa22d72">  
+                              <img th:src="@{/csda_files/b68e342f-c1bf-4a56-93e7-f2832aebc5a1_312312.jpg}" alt="第三届CSDL中街联赛东三省赛区 | 打响CSDL赛事第一站！祖国70华诞繁荣昌盛！">  
+                              <article>第三届CSDL中街联赛东三省赛区 | 打响CSDL赛事第一站！祖国70华诞繁荣昌盛！</article>  </a>  </div>  <div class="item">  
+                          <a href="http://www.csda.cn.com/csda/wx/indx/notice_content.html?articleId=2c91e8f36d047589016d434fea122cca">  
+                              <img th:src="@{/csda_files/1bb30864-bca7-4a8b-bd91-25a1b8eadc32_36316816eb5456786ff1730d1c4dde9.jpg}" alt="第三届CSDL中街联赛再度袭来！">  
+                              <article>第三届CSDL中街联赛再度袭来！</article>  </a>  </div>  <div class="item">  
+                          <a href="http://www.csda.cn.com/csda/wx/indx/notice_content.html?articleId=2c91e8f36d047589016d3e93ff9c2888">  
+                              <img th:src="@{/csda_files/367c034f-4b20-40f5-b0cb-a32ef40fb61b_微信图片_20190925170707.jpg}" alt="第三届CSDL中街联赛天河CBD广东站再度引爆花城！">  
+                              <article>第三届CSDL中街联赛天河CBD广东站再度引爆花城！</article>  </a>  </div>  <div class="item">  
+                          <a href="http://www.csda.cn.com/csda/wx/indx/notice_content.html?articleId=2c91e8f36d51c4a8016d676d39db1467">  
+                              <img th:src="@{/csda_files/b21edd7f-60dd-48ba-8e50-cc74c2f19202_5.jpg}" alt="第三届CSDL中街联赛湖北赛区将在襄阳开战！">  <article>第三届CSDL中街联赛湖北赛区将在襄阳开战！</article>  </a>  </div>  <div class="item">  <a href="http://www.csda.cn.com/csda/wx/TextbookVideo/grading_city.html?noticeId=2c91e8f36cdb5f5c016d014a8c59263a">  <img th:src="@{/csda_files/71aab039-61fb-4b23-a1d4-e539e9d7e895_微信图片_20190910141152.jpg}" alt="CSDA2019全国街舞大众考级-北京站报名通道开启！">  <article>CSDA2019全国街舞大众考级-北京站报名通道开启！</article>  </a>  </div>  </div> </div>
+              </div>
+             <!--轮播结束-->
+             <!--加入我们开始-->
+              <div class="index_join">
+                 <p class="index_join_p">欢迎加入我们</p>
+                 <p class="index_join_english">WELCOM TO JOIN US</p>
+                  <img class="join_pic" src="@{/csda_files/join_erweima.jpg}" alt="加入我们">
+                  <p class="index_join_btm_p">欢迎全国街舞机构申请加入我们</p>
+                  <button class="index_join_btn">扫码申请</button>
+              </div>
+             <!--加入我们结束-->
+          </div>
+      </div>
+      <!--最新动态开始-->
+      <div class="news">
+          <div class="news_box">
+              <p class="mid_title">最新动态</p>
+              <p class="mid_english">RECENT NEWS</p>
+              <p class="more_p">
+              		<!--最新动态ID写死 2c91e8f3607d7d2601608b68182f002b-->
+                  <a class="more_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_dynamics.html?typeId=2c91e8f3608b85c501608b870e320001">更多 &gt;&gt;</a>
+              </p>
+              <div class="main_news_box" id="mainNews" data-id="2c91e8f3608b85c501608b870e320001">
+
+              <div class="news_item verti">     <div class="item_box">         <div class="item_left verti">
+                  <img class="transl_Y" th:src="@{/csda_files/bc5a15c4-aa46-427e-9b37-486dce3f2bba_微信截图_20191115165022-----1.jpg}" alt="">
+              </div>
+                  <div class="item_right verti">
+                      <p class="item_title">
+                          <a class="item_title_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_article.html?articleId=2c91e8f36d51c4a8016e6e4404311b30">伦敦奥运会体操冠军—来自云南的郭伟阳—预祝第三届中街联赛云南站暨云南省第一届街舞U系列锦标赛圆满成功！</a>             </p>             <p class="item_text">                 <span class="item_text_span"> </span>             </p>             <div class="item_btm">                 <div class="item_time verti"> 2019-11-15 </div>                 <div class="item_writer verti"> CSDA宣传部 </div>             </div>          </div>     </div>  </div> <div class="news_item verti">     <div class="item_box">         <div class="item_left verti">
+                  <img class="transl_Y" th:src="@{/csda_files/2f2bdb6a-0b00-40cd-a451-2837286e6ab8_微信截图_20191114155800.jpg}" alt="">
+              </div>         <div class="item_right verti">             <p class="item_title">
+                  <a class="item_title_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_article.html?articleId=2c91e8f36d51c4a8016e68efe1670d9c">
+                      CSDA 2019年11月9日 全国大众街舞考级-海南站新闻报道</a>             </p>             <p class="item_text">
+                  <span class="item_text_span"> </span>             </p>             <div class="item_btm">
+                  <div class="item_time verti"> 2019-11-14 </div>                 <div class="item_writer verti"> CSDA宣传部 </div>             </div>
+              </div>     </div>  </div> <div class="news_item verti">     <div class="item_box">         <div class="item_left verti">
+                  <img class="transl_Y" th:src="@{/csda_files/be5cbdff-5051-48f4-b7b6-eecf97b4df4c_微信图片_20191107172247.png}" alt="">         </div>         <div class="item_right verti">             <p class="item_title">                 <a class="item_title_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_article.html?articleId=2c91e8f36d51c4a8016e452b9b274dd0">CSDA全国街舞执行委员会防诈骗公告！</a>             </p>             <p class="item_text">                 <span class="item_text_span"> </span>             </p>             <div class="item_btm">                 <div class="item_time verti"> 2019-11-07 </div>                 <div class="item_writer verti"> CSDA总委会 </div>             </div>          </div>     </div>  </div> <div class="news_item verti">     <div class="item_box">         <div class="item_left verti">             <img class="transl_Y" th:src="@{/csda_files/819ceadd-0806-4839-8249-718897124470_1.jpg}" alt="">         </div>         <div class="item_right verti">             <p class="item_title">                 <a class="item_title_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_article.html?articleId=2c91e8f36d51c4a8016e588e67796333">CSDA 2019年10月26日 全国大众街舞考级-北京站精彩集锦</a>             </p>             <p class="item_text">                 <span class="item_text_span"> </span>             </p>             <div class="item_btm">                 <div class="item_time verti"> 2019-10-31 </div>                 <div class="item_writer verti"> CSDA宣传部 </div>             </div>          </div>     </div>  </div> <div class="news_item verti">     <div class="item_box">         <div class="item_left verti">             <img class="transl_Y" th:src="@{/csda_files/8c22c87d-0616-478c-9835-2dee0bc8157c__R2A0030_2.jpg}" alt="">         </div>         <div class="item_right verti">             <p class="item_title">                 <a class="item_title_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_article.html?articleId=2c91e8f36d51c4a8016dfbaae32c3c0a">第三届CSDL中街联赛广州赛区晋级名单</a>             </p>             <p class="item_text">                 <span class="item_text_span"> </span>             </p>             <div class="item_btm">                 <div class="item_time verti"> 2019-10-24 </div>                 <div class="item_writer verti"> CSDA宣传部 </div>             </div>          </div>     </div>  </div> <div class="news_item verti">     <div class="item_box">         <div class="item_left verti">             <img class="transl_Y" th:src="@{/csda_files/4ca4acce-c0fa-43dd-8d71-09390070b7f4_微信截图_20191024160845.jpg}" alt="">         </div>         <div class="item_right verti">             <p class="item_title">                 <a class="item_title_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_article.html?articleId=2c91e8f36d51c4a8016dfcd18eb63f48">CSDA 2019年10月19日 全国大众街舞考级-江阴站精彩集锦</a>             </p>             <p class="item_text">                 <span class="item_text_span"> </span>             </p>             <div class="item_btm">                 <div class="item_time verti"> 2019-10-24 </div>                 <div class="item_writer verti"> CSDA宣传部 </div>             </div>          </div>     </div>  </div> </div>
+          </div>
+      </div>
+      <!--最新动态结束-->
+      <!--官方通知开始-->
+      <div class="notice">
+          <div class="notice_box">
+              <p class="mid_title">官方通知</p>
+              <p class="mid_english">OFFICIAL NOTICE</p>
+              <p class="more_p">
+                  <a class="more_a" href="http://www.csda.cn.com/csda/webPC/notice/notice.html">更多 &gt;&gt;</a>
+              </p>
+              <div class="main_notice_box">
+                 <div class="notice_left verti">
+                     <a id="mainNoticeUrl" href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=mainNotice&amp;articleId=2c91e8f36d51c4a8016e6e2ca9821a97">
+                         <img id="mainNoticeIcon" th:src="@{/csda_files/d6bcfbab-5551-49aa-b209-f7bbd0dfbb46_机构宣传封面尺寸.jpg}" alt="">
+                         <article id="mainNoticeTitle">黑舞室街舞文化传播有限公司成为CSDA会员单位！</article>
+                     </a>
+                 </div>
+                 <div class="notice_right verti">
+                     <ul class="notice_right_ul" id="mainNotice" data-id="2c91e8f3607d7d2601608b68182f002b">
+                     <li class="notice_right_li">     <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=mainNotice&amp;articleId=2c91e8f36d51c4a8016e6e2ca9821a97">        <span class="notice_title verti">黑舞室街舞文化传播有限公司成为CSDA会员单位！</span>         <span class="notice_time verti">2019-11-15</span>     </a>  </li> <li class="notice_right_li">     <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=mainNotice&amp;articleId=2c91e8f36d51c4a8016e62de85ee7852">        <span class="notice_title verti">攸县炫5元素街舞学校成为CSDA街舞文化推广点！</span>         <span class="notice_time verti">2019-11-13</span>     </a>  </li> <li class="notice_right_li">     <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=mainNotice&amp;articleId=2c91e8f36d51c4a8016e5e41cded6f66">        <span class="notice_title verti">长沙Max街舞体验馆成为CSDA街舞文化推广点！</span>         <span class="notice_time verti">2019-11-12</span>     </a>  </li> <li class="notice_right_li">     <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=mainNotice&amp;articleId=2c91e8f36d51c4a8016e5964d97668bc">        <span class="notice_title verti">乐舞舞蹈成为CSDA街舞文化推广点！</span>         <span class="notice_time verti">2019-11-11</span>     </a>  </li> <li class="notice_right_li">     <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=mainNotice&amp;articleId=2c91e8f36d51c4a8016e48ce95a051b2">        <span class="notice_title verti">米粒儿家族 · 街舞学校成为CSDA一星授权执行机构!</span>         <span class="notice_time verti">2019-11-08</span>     </a>  </li> <li class="notice_right_li">     <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=mainNotice&amp;articleId=2c91e8f36d51c4a8016e4518273a4dab">        <span class="notice_title verti">RAVE街舞工作室成为CSDA会员单位！</span>         <span class="notice_time verti">2019-11-07</span>     </a>  </li> <li class="notice_right_li">     <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=mainNotice&amp;articleId=2c91e8f36d51c4a8016e4544737a4e08">        <span class="notice_title verti">安徽艺殿堂少儿培训有限公司成为CSDA街舞文化推广点！</span>         <span class="notice_time verti">2019-11-07</span>     </a>  </li> </ul>
+                 </div>
+              </div>
+          </div>
+      </div>
+      <!--官方通知结束-->
+      <!--红头文件开始-->
+      <div class="files">
+          <div class="files_box">
+              <p class="mid_title">红头文件</p>
+              <p class="mid_english">RED-HEAD DOCUMENT</p>
+              <p class="more_p">
+                  <a class="more_a" href="http://www.csda.cn.com/csda/webPC/notice/notice.html?index=1">更多 &gt;&gt;</a>
+              </p>
+              <!--红头文件开始-->
+              <div class="red_head_files">
+                  <div class="files_main">
+                       <ul class="files_main_ul" id="redHead" data-id="2c91e8f3608b85c501608b8651910000">
+
+                       <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f36521270901652185470a001e">          <span class="notice_title verti">关于成立CSDA台湾事业发展部的授权通知</span>          <span class="notice_time verti">2018-08-08</span>      </a>  </li> <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f364c456300164f3c8db5c2670">          <span class="notice_title verti">CSDA关于广东省大众街舞考级的通知</span>          <span class="notice_time verti">2018-07-30</span>      </a>  </li> <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f363d4fbb701641cb767f923c9">          <span class="notice_title verti">关于CSDA全国大众街舞考级改革的通知</span>          <span class="notice_time verti">2018-06-20</span>      </a>  </li> <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f362d7abda01633e824a441c79">          <span class="notice_title verti">关于授权湖南臻星体育科技有限公司为CSDA湖南办事处执行公司的通知</span>          <span class="notice_time verti">2018-05-08</span>      </a>  </li> <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f36289d1a401628fd636b70260">          <span class="notice_title verti">CSDA全国街舞执行委员会关于考级中心授权通知</span>          <span class="notice_time verti">2018-04-04</span>      </a>  </li> <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f36233d9cf0162420809ca020e">          <span class="notice_title verti">关于街舞普及“街舞进校园”通知</span>          <span class="notice_time verti">2018-03-20</span>      </a>  </li> <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f36233d9cf016242003d900205">          <span class="notice_title verti">关于街舞普及“街舞进社区”通知</span>          <span class="notice_time verti">2018-03-20</span>      </a>  </li> <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f362186fd8016228f85aad0539">          <span class="notice_title verti">关于2018年全国大众街舞裁判员年审、培训考核活动政策调整</span>          <span class="notice_time verti">2018-03-09</span>      </a>  </li> <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f3622a237b01622ce1fcc40021">          <span class="notice_title verti">关于CSDA教练员培训考核的改革说明</span>          <span class="notice_time verti">2018-02-03</span>      </a>  </li> <li class="files_main_li verti">      <a href="http://www.csda.cn.com/csda/webPC/notice/notice_article.html?type=redHead&amp;articleId=2c91e8f362438be3016247df031503fd">          <span class="notice_title verti">2017年CSDA全国大众考级的说明通知</span>          <span class="notice_time verti">2017-11-13</span>      </a>  </li> </ul>
+                  </div>
+              </div>
+              <!--红头文件结束-->
+          </div>
+      </div>
+      <!--红头文件结束-->
+  </main>
+<!--中部结束-->
+<!--底部开始-->
+<footer>
+    <div class="friend_links">
+        <div class="friend_links_main">
+            <span class="verti">友情链接：</span>
+            <a class="verti" href="http://www.csdl.xn--fiqs8s/" target="_blank">CSDA赛事网</a>
+            <a class="verti" href="http://www.sport.gov.cn/n16/index.html" target="_blank">国家体育总局</a>
+            <a class="verti" href="http://www.sport.gov.cn/n16/n33193/n33223/n34839/index.html" target="_blank">体操运动管理中心</a>
+            <a class="verti" href="http://gymnastics.sport.org.cn/" target="_blank">体操协会</a>
+        </div>
+        <div class="footer_btm">
+            <div class="footer_btm_main">
+                <div class="footer_main_top">
+                     <span class="company_name verti">
+                         Copyright©2018北京中嘻汇文化传媒有限公司
+                     </span>
+                    <br>
+                    <span class="company_location verti">
+                         <img class="transl_Y" th:src="@{/csda_files/local_icon.png}" alt="">
+                          地址：北京市朝阳区高碑店广渠路华膳园5号楼306室
+                    </span>
+                </div>
+                <div class="footer_main_btm">
+                    <div class="footer_main_btm_left verti">
+                        <div class="verti QR_code_box">
+                            <img th:src="@{/csda_files/official_website.jpg}" alt="">
+                            <p class="QR_code_text">CSDA运营平台</p>
+                        </div>
+                        <div class="verti QR_code_box">
+                            <img th:src="@{/csda_files/saishi_erweima.jpg}" alt="">
+                            <p class="QR_code_text">CSDA赛事服务号</p>
+                        </div>
+                        <div class="verti QR_code_box">
+                            <img th:src="@{/csda_files/weibo_erweima.jpg}" alt="">
+                            <p class="QR_code_text">CSDA官方微博</p>
+                        </div>
+                        <div class="verti QR_code_box">
+                            <img th:src="@{/csda_files/dingyuehao_erweima.jpg}" alt="">
+                            <p class="QR_code_text">CSDA订阅号</p>
+                        </div>
+                    </div>
+                    <div class="footer_main_btm_right verti">
+                        <p>联系电话：</p>
+                        <p>总机电话：010-57097609</p>
+                        <p>赛事电话：010-57097609转8008</p>
+                        <p>演出电话：010-57097609转8009</p>
+                        <p>财务电话：010-57097609转8007</p>
+                        <p>资审电话：010-57097609转8002/8003</p>
+                        <p>培训电话：010-57097609转8006/8010</p>
+                    </div>
+                </div>
+            </div>
+            <p class="beian">京ICP备14043089号-1</p>
+        </div>
+    </div>
+</footer>
+<!--底部结束-->
+
+<!--客服开始-->
+<div class="service transl_Y">
+   <ul class="service_ul">
+       <li class="service_li verti">
+           <a href="javascript:" class="service_li_a number_a"></a>
+           <div class="number_box service_erji_box">
+               <p>联系电话：<br>
+                   总机电话：010-57097609 <br>
+                   赛事电话：010-57097609转8008 <br>
+                   资审电话：010-57097609转8002/8003</p>
+           </div>
+       </li>
+       <li class="service_li verti">
+           <a href="javascript:" class="service_li_a time_a"></a>
+           <div class="number_box service_erji_box">
+               <p>工作时间： <br>
+                   周一到周五：10:00-19:00</p>
+           </div>
+       </li>
+       <li class="service_li verti">
+           <a href="javascript:" class="service_li_a weixin_a"></a>
+           <div class="number_box service_erji_box">
+               <p class="weixin_erweima_title">服务号二维码</p>
+               <img class="weixin_erweima" th:src="@{/csda_files/weixin_erweima.jpg}" alt="">
+           </div>
+       </li>
+       <li class="service_li verti">
+           <!--<a href="#header" class="service_li_a top_a"></a>-->
+           <a href="javascript:" class="service_li_a top_a"></a>
+       </li>
+   </ul>
+</div>
+<!--客服结束-->
+<!-- <script src="public/js/bootstrap.min.js"></script> -->
+<script th:src="@{/csda_files/public.js.下载}"></script>
+<script>
+    $(".item_box").click(function () {
+        window.location.href='committee_dynamics/committee_article.html';
+    });
+    $(function () {
+//     溢出隐藏处理
+        overflowHidden($(".item_text_span"),"item_text_overflow");
+//     客服鼠标划过样式
+        $(".service_li").hover(function () {
+            $(this).find(".service_li_a").addClass("service_li_a_active").siblings(".service_erji_box").css("right","61px");
+        },function () {
+            $(this).find(".service_li_a").removeClass("service_li_a_active").siblings(".service_erji_box").css("right","-196px");
+        });
+
+//        回到顶部延迟效果
+        $(".top_a").click(function(){
+            var sc=$(window).scrollTop();
+            $('body,html').animate({scrollTop:0},500);
+        })
+
+    });
+
+    $(function () {
+        loadCsdaAd('csda_index');
+        loadMainNews();
+        loadMainNotice();
+        loadRedHead();
+    });
+
+
+    function loadCsdaAd(position){
+        var url = ctx + "/wechartExam/loadCsdaAd.spv?postion="+position;
+        $.get(url,function(data, status){
+            var resultCode = data.resultCode;
+            if("success" == resultCode){
+                var list = data.resultMessage;
+                if(list != null && list.length > 0){
+                    $("#carousel-example-generic").html("");
+                    var str = " <ol class='carousel-indicators'> ";
+                    for(var i = 0;i<list.length; i++){
+                    	var ad = list[i];
+                    	if(i == 0){
+                    		str += " <li data-target=\"#carousel-example-generic\" data-slide-to=\""+i+"\" class='active'></li> ";
+                    	}else{
+                    		str += " <li data-target=\"#carousel-example-generic\" data-slide-to=\""+i+"\" ></li> ";
+                    	}
+                    }
+                    str += " </ol> ";
+                    str += "  <div class=\"carousel-inner\" role=\"listbox\"> ";
+                    for(var i = 0;i<list.length; i++){
+                    	var ad = list[i];
+
+                    	if(i == 0){
+                    		str += " <div class=\"item active\"> ";
+                    	}else{
+                    		str += " <div class=\"item\"> ";
+                    	}
+                    	if(ad.commonAd.adDetailUrl != null && ad.commonAd.adDetailUrl != ''){
+                            str += " <a href=\""+ ad.commonAd.adDetailUrl+"\"> ";
+                        }else{
+                            str += " <a href=\"committee_dynamics/committee_conews.html?newsId="+ad.commonAd.id+"\"> ";
+                        }
+                    	str += " <img src=\""+ad.commonAd.adThumbnail+"\" alt=\""+ad.commonAd.adName+"\"> ";
+                    	str += " <article>"+ad.commonAd.adName+"</article> ";
+                    	str += " </a> ";
+                    	str += " </div> ";
+                    }
+                    str += " </div> ";
+                    $("#carousel-example-generic").html(str);
+                    $("#carousel-example-generic").carousel();
+                }
+            }
+        });
+    }
+
+    function loadMainNews(){
+    	var typeId = $("#mainNews").attr("data-id");
+    	var url = ctx + "/wechartOrg/queryPageTypeArticles.spv?rand ="+Math.random();
+    	$.post(url,{"typeId":typeId,"pageNo":"0","pageSize":"6"},function(data, status){
+    		var resultCode = data.resultCode;
+    		if("success" == resultCode){
+    			var list = data.resultMessage;
+        		for(var i = 0; i < list.length; i++){
+         			var article = list[i];
+    				var subStr = "";
+    				var thumbnailList = article.thumbnailList;
+    				var thumbnail = "";
+    				if(thumbnailList.length > 0){
+    					thumbnail = thumbnailList[0].thumbnail;
+    				}
+    				subStr += "<div class=\"news_item verti\"> ";
+    				subStr += "    <div class=\"item_box\"> ";
+    				subStr += "        <div class=\"item_left verti\"> ";
+    				subStr += "            <img class=\"transl_Y\" src=\""+thumbnail+"\" alt=\"\"> ";
+    				subStr += "        </div> ";
+    				subStr += "        <div class=\"item_right verti\"> ";
+    				subStr += "            <p class=\"item_title\"> ";
+    				subStr += "                <a class=\"item_title_a\" href=\"committee_dynamics/committee_article.html?articleId="+article.id+"\">" + article.title + "</a> ";
+    				subStr += "            </p> ";
+    				subStr += "            <p class=\"item_text\"> ";
+    				if(article.subTitle == null || article.subTitle == ""){
+    					subStr += "                <span class=\"item_text_span\"> </span> ";
+    				}else{
+    					subStr += "                <span class=\"item_text_span\"> " + article.subTitle + "</span> ";
+    				}
+
+    				subStr += "            </p> ";
+    				subStr += "            <div class=\"item_btm\"> ";
+    				var date = new Date(article.pubTime);
+    				subStr += "                <div class=\"item_time verti\"> " + dateFtt("yyyy-MM-dd", date) + " </div> ";
+    				subStr += "                <div class=\"item_writer verti\"> "+ article.author +" </div> ";
+    				subStr += "            </div> ";
+    				subStr += "         </div> ";
+    				subStr += "    </div> ";
+    				subStr += " </div> ";
+        			$("#mainNews").append(subStr);
+        		}
+    		}
+    	});
+    }
+
+    function loadMainNotice(){
+    	var typeId = $("#mainNotice").attr("data-id");
+    	var url = ctx + "/wechartOrg/queryPageTypeArticles.spv?rand ="+Math.random();
+    	$.post(url,{"typeId":typeId,"pageNo":"0","pageSize":"7"},function(data, status){
+    		var resultCode = data.resultCode;
+    		if("success" == resultCode){
+    			var list = data.resultMessage;
+        		for(var i = 0; i < list.length; i++){
+         			var article = list[i];
+    				var subStr = "";
+    				var thumbnailList = article.thumbnailList;
+    				var thumbnail = "";
+    				if(thumbnailList.length > 0){
+    					thumbnail = thumbnailList[0].thumbnail;
+    				}
+    				if(i == 0){
+    					$("#mainNoticeIcon").attr("src",thumbnail);
+    					$("#mainNoticeUrl").attr("href","notice/notice_article.html?type=mainNotice&articleId="+article.id);
+    					$("#mainNoticeTitle").html(article.title);
+    				}
+    				subStr += "<li class=\"notice_right_li\"> ";
+    				subStr += "    <a href=\"notice/notice_article.html?type=mainNotice&articleId="+article.id+"\"> ";
+    				subStr += "       <span class=\"notice_title verti\">" + article.title + "</span> ";
+    				var date = new Date(article.pubTime);
+    				subStr += "        <span class=\"notice_time verti\">" + dateFtt("yyyy-MM-dd", date) + "</span> ";
+    				subStr += "    </a> ";
+    				subStr += " </li> ";
+        			$("#mainNotice").append(subStr);
+        		}
+    		}
+    	});
+    }
+    function loadRedHead(){
+    	var typeId = $("#redHead").attr("data-id");
+    	var url = ctx + "/wechartOrg/queryPageTypeArticles.spv?rand ="+Math.random();
+    	$.post(url,{"typeId":typeId,"pageNo":"0","pageSize":"10"},function(data, status){
+    		var resultCode = data.resultCode;
+    		if("success" == resultCode){
+    			var list = data.resultMessage;
+        		for(var i = 0; i < list.length; i++){
+         			var article = list[i];
+    				var subStr = "";
+    				subStr += "<li class=\"files_main_li verti\"> ";
+    				subStr += "     <a href=\"notice/notice_article.html?type=redHead&articleId="+article.id+"\"> ";
+    				subStr += "         <span class=\"notice_title verti\">" + article.title + "</span> ";
+    				var date = new Date(article.pubTime);
+    				subStr += "         <span class=\"notice_time verti\">" + dateFtt("yyyy-MM-dd", date) + "</span> ";
+    				subStr += "     </a> ";
+    				subStr += " </li> ";
+        			$("#redHead").append(subStr);
+        		}
+    		}
+    	});
+    }
+</script>
+<div style="display: none">
+    <script th:src="@{/csda_files/z_stat.php}" language="JavaScript"></script><script th:src="@{/csda_files/core.php}" charset="utf-8" type="text/javascript"></script><a href="https://www.cnzz.com/stat/website.php?web_id=1273328440" target="_blank" title="站长统计">站长统计</a>
+</div>
+
+</body></html>

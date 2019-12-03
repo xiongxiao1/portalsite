@@ -1,0 +1,30 @@
+function centerPic(select,w,h) {
+    if(select.width()>select.height()){
+        select.height(select.parent().height());
+    }else {
+        select.width(select.parent().width());
+    }
+}
+
+//    截取链接
+function splitLink(navsele,navactive,erjisele,erjiactive) {
+    var index=0;
+    var thisURL = document.URL;
+    if(thisURL.split('?')[1]){
+        index =thisURL.split('?')[1];
+        index= index.split("=")[1];
+    }
+    // alert(index)
+    // $(".intro_nav_li").eq(index).addClass("intro_nav_active").siblings().removeClass("intro_nav_active");
+    navsele.eq(index).addClass(navactive).siblings().removeClass(navactive);
+    erjisele.eq(index).addClass(erjiactive).siblings(erjisele).removeClass(erjiactive)
+}
+// 文字多行溢出处理
+function overflowHidden(select,cla) {
+    console.log(select.height);
+    for(var i=0;i<select.length;i++){
+        if(select.eq(i).height()>select.eq(i).parent().height()){
+           select.eq(i).parent().addClass(cla);
+        }
+    }
+}
