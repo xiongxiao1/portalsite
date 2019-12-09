@@ -19,6 +19,7 @@ public class MenuController {
     @RequestMapping("/getAllItem")
     public List<MenuItem> getAllItem(String parentId){
 
+        System.out.printf(parentId==null?"" : parentId);
         return  menuService.getAllItem(parentId);
     }
 }

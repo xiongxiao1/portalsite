@@ -15,10 +15,7 @@
 <body>
 <script type="application/javascript">
     $(document).ready(function(){
-        var type = getUrlArgStr();
-        alert([[${rootId}]]);
-        console.info([[${rootId}]]);
-        $.get("http://localhost:8080/getTabInfo", function(data){
+        $.get("http://localhost:8080/getTabInfo?parentId="+[[${rootId}]], function(data){
             console.info(data.tableCols);
             $('#dg').datagrid({
                 data: [
@@ -39,6 +36,7 @@
                 total:2000,
                 pageSize:10
             });
+            $('#formTab').appendChild();
         });
 
         $('#mb').menubutton({
@@ -88,31 +86,31 @@
 <div id="pp" style="background:#efefef;border:1px solid #ccc;"></div>
 
 <!--表单-->
-<table style="margin-top: 20px">
-    <tr>
+<table style="margin-top: 20px" id="formTab">
+    <!--<tr>
         <td>标题：</td>
         <td><input name="title" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>英文名称：</td>
-        <td><input name="enTitle" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>描述：</td>
-        <td><input name="description" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>类型</td>
-        <td><input name="kind" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>禁用：</td>
-        <td><input name="enableflag" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>排序：</td>
-        <td><input name="ordernum" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
+    </tr>-->
+    <!--<tr>-->
+        <!--<td>英文名称：</td>-->
+        <!--<td><input name="enTitle" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<td>描述：</td>-->
+        <!--<td><input name="description" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<td>类型</td>-->
+        <!--<td><input name="kind" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<td>禁用：</td>-->
+        <!--<td><input name="enableflag" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+        <!--<td>排序：</td>-->
+        <!--<td><input name="ordernum" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>-->
+    <!--</tr>-->
 </table>
 </body>
 </html>

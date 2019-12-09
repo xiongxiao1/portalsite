@@ -19,6 +19,8 @@ public class MenuItem {
     private int enableflag;
     private int ordernum;
 
+    private String idStr;
+
     public String getId() {
         return id;
     }
@@ -121,5 +123,9 @@ public class MenuItem {
 
     public void setOrdernum(int ordernum) {
         this.ordernum = ordernum;
+    }
+
+    public String getIdStr() {
+        return this.getId();
     }
 }

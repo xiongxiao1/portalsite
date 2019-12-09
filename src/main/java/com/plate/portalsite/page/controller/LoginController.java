@@ -15,6 +15,7 @@ public class LoginController {
         System.out.println("asdasdas");
         return "admin/index";
     }
+
     @RequestMapping("/itemPag")
     public String itemPag(String rootId, Model model){
 

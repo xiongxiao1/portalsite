@@ -8,6 +8,11 @@ import java.util.*;
 @RestController
 public class SysInfoController {
 
+    /**
+     * 返回对应列 生成表格和表单
+     * @param type
+     * @return
+     */
     @RequestMapping("getTabInfo")
     public Map<String, Object> getTabInfo(String type){
 
