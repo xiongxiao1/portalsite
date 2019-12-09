@@ -19,8 +19,6 @@ public class MenuItem {
     private int enableflag;
     private int ordernum;
 
-    private String idStr;
-
     public String getId() {
         return id;
     }
@@ -125,7 +123,22 @@ public class MenuItem {
         this.ordernum = ordernum;
     }
 
-    public String getIdStr() {
-        return this.getId();
+    @Override
+    public String toString() {
+        return "MenuItem{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", enTitle='" + enTitle + '\'' +
+                ", description='" + description + '\'' +
+                ", kind=" + kind +
+                ", createtime='" + createtime + '\'' +
+                ", createuserid='" + createuserid + '\'' +
+                ", updatetime='" + updatetime + '\'' +
+                ", updateuserid='" + updateuserid + '\'' +
+                ", urladdr='" + urladdr + '\'' +
+                ", parentId='" + parentId + '\'' +
+                ", enableflag=" + enableflag +
+                ", ordernum=" + ordernum +
+                '}';
     }
 }

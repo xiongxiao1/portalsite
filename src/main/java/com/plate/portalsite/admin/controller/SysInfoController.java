@@ -18,9 +18,8 @@ public class SysInfoController {
 
         Map<String,Object>result = new HashMap<>();
 
-        String[] fieldCols  = {"id","title","enTitle","description","kind"};
-        String[] titleCols  = {"id","标题","英文标题","描述","类型"};
-
+        String[] fieldCols  = {"num","title","enTitle","description","kind"};
+        String[] titleCols  = {"序号","标题","英文标题","描述","类型"};
         //表格
         List<Map<String,Object>>tableCols = new ArrayList<>();
         for (int i=0;i<fieldCols.length;i++) {
@@ -33,9 +32,10 @@ public class SysInfoController {
             }
             tableCols.add(item);
         }
+        result.put("tableCols",tableCols);
         //表单
         List<Map<String,Object>>formCols = new ArrayList<>();
-        for (int i=0;i<fieldCols.length;i++) {
+        for (int i=1;i<fieldCols.length;i++) {
             LinkedHashMap<String, Object> item = new LinkedHashMap<>();
             item.put("field",fieldCols[i]);
             item.put("title",titleCols[i]);
@@ -46,7 +46,6 @@ public class SysInfoController {
                 item.put("hidden",false);
             formCols.add(item);
         }
-        result.put("tableCols",tableCols);
         result.put("formCols",formCols);
         return result;
     }

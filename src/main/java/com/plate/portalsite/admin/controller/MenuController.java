@@ -22,4 +22,10 @@ public class MenuController {
         System.out.printf(parentId==null?"" : parentId);
         return  menuService.getAllItem(parentId);
     }
+
+    @RequestMapping("/saveMenuItem")
+    public void saveMenuItem(MenuItem menuItem){
+
+        System.out.printf(menuItem.toString());
+    }
 }
