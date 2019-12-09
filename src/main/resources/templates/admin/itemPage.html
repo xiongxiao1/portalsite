@@ -13,13 +13,13 @@
     <title>Title</title>
 </head>
 <body>
-<script type="application/javascript">
+<script type="application/javascript" th:inline="javascript">
     $(document).ready(function(){
         var type = getUrlArgStr();
-        alert([[${rootId}]]);
-        console.info([[${rootId}]]);
+        //获取rootId子节点数据
         $.get("http://localhost:8080/getTabInfo", function(data){
-            console.info(data.tableCols);
+
+            //初始化表格
             $('#dg').datagrid({
                 data: [
                     {code:'value11', name:'value12', price:'232'},
@@ -39,6 +39,16 @@
                 total:2000,
                 pageSize:10
             });
+
+            //初始化表单
+            var str = "";
+            for(var i=0;i<data.formCols.length;i++){
+                str += "<tr>\n" +
+                    "        <td>"+data.formCols[i].title+"</td>\n" +
+                    "        <td><input name=\""+ data.formCols[i].field +"\"  style=\"width:300px\" class='formItem'></td>\n" +
+                    "    </tr>";
+            }
+            $('#formTab').html(str);
         });
 
         $('#mb').menubutton({
@@ -58,27 +68,35 @@
         }
         return "menuItem";
     }
-    //返回的是对象形式的参数
-    function getUrlArgObject(){
-        var args=new Object();
-        var query=location.search.substring(1);//获取查询串
-        var pairs=query.split(",");//在逗号处断开
-        for(var i=0;i<pairs.length;i++){
-            var pos=pairs[i].indexOf('=');//查找name=value
-            if(pos==-1){//如果没有找到就跳过
-                continue;
-            }
-            var argname=pairs[i].substring(0,pos);//提取name
-            var value=pairs[i].substring(pos+1);//提取value
-            args[argname]=unescape(value);//存为属性
+
+    function submitData() {
+
+        var inputs = $(".formItem");
+        console.info(inputs);
+        var urlParams = "?";
+        for (var i=0;i<inputs.length;i++) {
+
+            var name = inputs[i].name;
+            var value = inputs[i].value;
+            urlParams = urlParams+name+"="+value+"&";
         }
-        return args;//返回对象
+        var parentId = [[${rootId}]];
+        urlParams += "parentId="+parentId.substring(1,parentId.length-1);
+        console.info(urlParams);
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/saveMenuItem"+urlParams,
+            success: function(msg){
+                console.info( "Data Saved: " + msg );
+            }
+        });
     }
 </script>
 <!--功能按钮-->
 <div>
     <a id="btnAdd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'">新建</a>
-    <a id="btnUpdate" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-update'">修改</a>
+    <a id="btnUpdate" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-update'" >修改</a>
+    <a id="btnSave" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="submitData()">保存</a>
     <a id="btnDelete" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-delete'">删除</a>
     <a id="btnSearch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
 </div>
@@ -88,31 +106,7 @@
 <div id="pp" style="background:#efefef;border:1px solid #ccc;"></div>
 
 <!--表单-->
-<table style="margin-top: 20px">
-    <tr>
-        <td>标题：</td>
-        <td><input name="title" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>英文名称：</td>
-        <td><input name="enTitle" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>描述：</td>
-        <td><input name="description" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>类型</td>
-        <td><input name="kind" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>禁用：</td>
-        <td><input name="enableflag" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
-    <tr>
-        <td>排序：</td>
-        <td><input name="ordernum" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px"></td>
-    </tr>
+<table style="margin-top: 20px" id = "formTab">
 </table>
 </body>
 </html>

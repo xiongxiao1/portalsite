@@ -58,8 +58,8 @@
     //根据根节点打开右侧内容窗口
     var opentab = function(node,type){
 
-        var url =  "http://localhost:8080/itemPag"+"?rootId="+node.id;
-        var content = '<iframe frameborder="0"  src="'+url+'" style="width:100%;height: 680px;"></iframe>';
+        var url =  "http://localhost:8080/itemPag"+"?rootId=_"+node.id;
+        var content = '<iframe frameborder="0"  src="'+url+'" style="width:100%;height: 680px;" id="'+node.id+'"></iframe>';
 
         $('#contentTabs').tabs('add',{
 			title:node.title,

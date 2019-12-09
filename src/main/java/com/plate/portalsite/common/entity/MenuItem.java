@@ -122,4 +122,23 @@ public class MenuItem {
     public void setOrdernum(int ordernum) {
         this.ordernum = ordernum;
     }
+
+    @Override
+    public String toString() {
+        return "MenuItem{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", enTitle='" + enTitle + '\'' +
+                ", description='" + description + '\'' +
+                ", kind=" + kind +
+                ", createtime='" + createtime + '\'' +
+                ", createuserid='" + createuserid + '\'' +
+                ", updatetime='" + updatetime + '\'' +
+                ", updateuserid='" + updateuserid + '\'' +
+                ", urladdr='" + urladdr + '\'' +
+                ", parentId='" + parentId + '\'' +
+                ", enableflag=" + enableflag +
+                ", ordernum=" + ordernum +
+                '}';
+    }
 }
