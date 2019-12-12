@@ -23,4 +23,74 @@
 
         select * from m_item
     </select>
+
+    <update id="update" parameterType="com.plate.portalsite.common.entity.MenuItem">
+
+        update m_item
+        <set>
+            <if test="title != null">
+                title= #{title},
+            </if>
+            <if test="enTitle != null">
+                enTitle= #{enTitle},
+            </if>
+            <if test="kind != null">
+                kind= #{kind},
+            </if>updatetime
+            <if test="updatetime != null">
+                updatetime= #{updatetime},
+            </if>
+            <if test="updateuserid != null">
+                updateuserid= #{updateuserid},
+            </if>
+            <if test="urladdr != null">
+                urladdr= #{urladdr},
+            </if>
+            <if test="parentId != null">
+                parentId= #{parentId},
+            </if>
+            <if test="enableflag != null">
+                enableflag= #{enableflag},
+            </if>
+            <if test="ordernum != null">
+                ordernum= #{ordernum},
+            </if>
+        </set>
+        where id= #{id}
+    </update>
+
+    <insert id="save" parameterType="com.plate.portalsite.common.entity.MenuItem">
+
+
+        insert into m_item(
+            id,
+            title,
+            enTitle,
+            description,
+            kind,
+            createtime,
+            createuserid,
+            updatetime,
+            updateuserid,
+            urladdr,
+            parentId,
+            enableflag,
+            ordernum
+        )
+        values(
+            #{id},
+            #{title},
+            #{enTitle},
+            #{description},
+            #{kind},
+            #{createtime},
+            #{createuserid},
+            #{updatetime},
+            #{updateuserid},
+            #{urladdr},
+            #{parentId},
+            #{enableflag},
+            #{ordernum}
+        )
+    </insert>
 </mapper>

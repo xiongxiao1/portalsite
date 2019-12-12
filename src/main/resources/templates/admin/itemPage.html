@@ -15,26 +15,28 @@
 <body>
 <script type="application/javascript" th:inline="javascript">
     $(document).ready(function(){
-        var type = getUrlArgStr();
         //获取rootId子节点数据
         $.get("http://localhost:8080/getTabInfo", function(data){
 
-            //初始化表格
-            $('#dg').datagrid({
-                data: [
-                    {code:'value11', name:'value12', price:'232'},
-                    {code:'value21', name:'value22', price:'232'},
-                    {code:'value21', name:'value22', price:'232'},
-                    {code:'value21', name:'value22', price:'232'},
-                    {code:'value21', name:'value22', price:'232'},
-                    {code:'value21', name:'value22', price:'232'},
-                    {code:'value21', name:'value22', price:'232'},
-                    {code:'value21', name:'value22', price:'232'},
-                    {code:'value21', name:'value22', price:'232'},
-                    {code:'value21', name:'value22', price:'232'}
-                ],
-                columns:[data.tableCols],
-            });
+            $.get("http://localhost:8080/getTreeList", function(list){
+                //初始化表格
+                $('#dg').datagrid({
+                    data: [
+                        {code:'value11', name:'value12', price:'232'},
+                        {code:'value21', name:'value22', price:'232'},
+                        {code:'value21', name:'value22', price:'232'},
+                        {code:'value21', name:'value22', price:'232'},
+                        {code:'value21', name:'value22', price:'232'},
+                        {code:'value21', name:'value22', price:'232'},
+                        {code:'value21', name:'value22', price:'232'},
+                        {code:'value21', name:'value22', price:'232'},
+                        {code:'value21', name:'value22', price:'232'},
+                        {code:'value21', name:'value22', price:'232'}
+                    ],
+                    columns:[data.tableCols],
+                });
+            }
+
             $('#pp').pagination({
                 total:2000,
                 pageSize:10
@@ -57,18 +59,6 @@
         });
     });
 
-    function getUrlArgStr(){
-        var q=location.search.substr(1);
-        var qs=q.split('&');
-        var argStr='';
-        if(qs){
-            for(var i=0;i<qs.length;i++){
-                argStr+=qs[i].substring(0,qs[i].indexOf('='))+'='+qs[i].substring(qs[i].indexOf('=')+1)+'&';
-            }
-        }
-        return "menuItem";
-    }
-
     function submitData() {
 
         var inputs = $(".formItem");
@@ -85,7 +75,7 @@
         console.info(urlParams);
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/saveMenuItem"+urlParams,
+            url: "http://localhost:8080/saveOrUpdateMenuItem"+urlParams,
             success: function(msg){
                 console.info( "Data Saved: " + msg );
             }

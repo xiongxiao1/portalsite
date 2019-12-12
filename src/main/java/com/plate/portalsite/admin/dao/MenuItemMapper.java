@@ -9,4 +9,8 @@ import java.util.List;
 public interface MenuItemMapper {
 
     public List<MenuItem> getAllItem(String parentId);
+
+    public void save(MenuItem menuItem);
+
+    public void update(MenuItem menuItem);
 }
