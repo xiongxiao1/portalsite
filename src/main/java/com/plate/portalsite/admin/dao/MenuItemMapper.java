@@ -13,4 +13,6 @@ public interface MenuItemMapper {
     public void save(MenuItem menuItem);
 
     public void update(MenuItem menuItem);
+
+    List<MenuItem> getMenuList(String parentId);
 }

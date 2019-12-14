@@ -19,6 +19,8 @@ public class MenuItem {
     private int enableflag;
     private int ordernum;
 
+    private String code;
+
     public String getId() {
         return id;
     }
@@ -139,6 +141,15 @@ public class MenuItem {
                 ", parentId='" + parentId + '\'' +
                 ", enableflag=" + enableflag +
                 ", ordernum=" + ordernum +
+                ", code='" + code + '\'' +
                 '}';
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

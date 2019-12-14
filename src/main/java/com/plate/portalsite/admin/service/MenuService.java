@@ -86,4 +86,36 @@ public class MenuService {
         }
 
     }
+
+    /**
+     * 获取当前树节点下的所有子节点 分页展示 按照code排序
+     * @param parentId
+     * @return
+     */
+    public List<Map<String, Object>> getTreeList(String parentId) {
+
+        List<Map<String, Object>>result = new ArrayList<Map<String, Object>>();
+        if(StringUtils.isEmpty(parentId)){
+            return result;
+        }
+
+
+        List<MenuItem> list = menuItemMapper.getMenuList(parentId);
+        //title","code","enTitle","description","kind
+        int i=1;
+        for (MenuItem menuItem : list){
+
+            Map<String, Object> item = new HashMap<>();
+            item.put("id",menuItem.getId());
+            item.put("num",i);
+            item.put("title",menuItem.getTitle());
+            item.put("code",menuItem.getCode());
+            item.put("enTitle",menuItem.getEnTitle());
+            item.put("description",menuItem.getDescription());
+            item.put("kind",menuItem.getKind());
+            result.add(item);
+            i++;
+        }
+        return result;
+    }
 }

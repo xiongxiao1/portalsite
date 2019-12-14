@@ -18,8 +18,8 @@ public class SysInfoController {
 
         Map<String,Object>result = new HashMap<>();
 
-        String[] fieldCols  = {"num","title","enTitle","description","kind"};
-        String[] titleCols  = {"序号","标题","英文标题","描述","类型"};
+        String[] fieldCols  = {"num","id","title","code","enTitle","description","kind"};
+        String[] titleCols  = {"序号","id","标题","编码","英文标题","描述","类型"};
         //表格
         List<Map<String,Object>>tableCols = new ArrayList<>();
         for (int i=0;i<fieldCols.length;i++) {
@@ -27,7 +27,7 @@ public class SysInfoController {
             item.put("field",fieldCols[i]);
             item.put("title",titleCols[i]);
             item.put("width",100);
-            if(i==0){
+            if( i==1){
                 item.put("hidden",true);
             }
             tableCols.add(item);
@@ -40,7 +40,7 @@ public class SysInfoController {
             item.put("field",fieldCols[i]);
             item.put("title",titleCols[i]);
             item.put("width",100);
-            if(i==0)
+            if(i==1)
                 item.put("hidden",true);
             else
                 item.put("hidden",false);

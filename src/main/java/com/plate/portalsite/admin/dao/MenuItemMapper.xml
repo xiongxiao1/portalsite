@@ -17,12 +17,20 @@
         <result property="parentId" column="parentId"/>
         <result property="enableflag" column="enableflag"/>
         <result property="ordernum" column="ordernum"/>
+        <result property="code" column="code"/>
     </resultMap>
 
     <select id="getAllItem" resultMap="MenuItemResult" parameterType="string">
 
         select * from m_item
     </select>
+
+    <select id="getMenuList" resultMap="MenuItemResult" parameterType="string">
+
+        select * from m_item
+        where parentId = #{parentId}
+    </select>
+
 
     <update id="update" parameterType="com.plate.portalsite.common.entity.MenuItem">
 
@@ -36,7 +44,7 @@
             </if>
             <if test="kind != null">
                 kind= #{kind},
-            </if>updatetime
+            </if>
             <if test="updatetime != null">
                 updatetime= #{updatetime},
             </if>
@@ -55,6 +63,10 @@
             <if test="ordernum != null">
                 ordernum= #{ordernum},
             </if>
+            <if test="code != null">
+                code= #{code},
+            </if>
+
         </set>
         where id= #{id}
     </update>
@@ -75,7 +87,8 @@
             urladdr,
             parentId,
             enableflag,
-            ordernum
+            ordernum,
+            code
         )
         values(
             #{id},
@@ -90,7 +103,8 @@
             #{urladdr},
             #{parentId},
             #{enableflag},
-            #{ordernum}
+            #{ordernum},
+            #{code}
         )
     </insert>
 </mapper>
