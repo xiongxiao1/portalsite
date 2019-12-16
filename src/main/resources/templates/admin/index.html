@@ -26,10 +26,18 @@
 	<div class="easyui-layout" style="width:100%;height:900px;">
 		<div id="top" region="north" title="网站管理平台" style="height:160px; width: 98%">
 		</div>
-		<div region="west" split="true" title="导航" style="width:20%;">
-			<!--菜单-->
-			<ul id="itemtree"></ul>
-		</div>
+		<!--<div region="west" split="true" title="导航" style="width:20%;">-->
+			<!--&lt;!&ndash;菜单&ndash;&gt;-->
+			<!--<ul id="itemtree"></ul>-->
+			<div id="aa" class="easyui-accordion" region="west" style="width:20%;">
+				<div title="导航栏管理"  data-options="selected:true"  style="overflow:auto;padding:10px;">
+					<ul id="itemtree"></ul>
+				</div>
+				<div title="消息动态管理" style="padding:10px;">
+					<ul></ul>
+				</div>
+			</div>
+		<!--</div>-->
 		<div id="content" region="center" style="padding:5px; width: 78%;height: 70% ">
 			<!--内容tab-->
 			<div id="contentTabs" class="easyui-tabs" style="width: 100%; height: auto">
