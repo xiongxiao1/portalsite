@@ -10,16 +10,21 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 
     @RequestMapping("/login")
-    public String login(){
+    public String login() {
 
         System.out.println("asdasdas");
         return "admin/index";
     }
 
     @RequestMapping("/itemPag")
-    public String itemPag(String rootId, Model model){
+    public String itemPag(String rootId, Model model) {
 
-        model.addAttribute("rootId",rootId);
+        model.addAttribute("rootId", rootId);
         return "admin/itemPage";
+    }
+
+    @RequestMapping("/itemEditor")
+    public String itemEditor(Model model) {
+        return "admin/itemEditor";
     }
 }

@@ -14,6 +14,9 @@ public class ItemContent {
     private String picId;
     private String orgId;
     private String topflag;
+    private String topCreateTime;
+    private String data;
+
 
     public String getId() {
         return id;
@@ -85,5 +88,21 @@ public class ItemContent {
 
     public void setTopflag(String topflag) {
         this.topflag = topflag;
+    }
+
+    public String getTopCreateTime() {
+        return topCreateTime;
+    }
+
+    public void setTopCreateTime(String topCreateTime) {
+        this.topCreateTime = topCreateTime;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

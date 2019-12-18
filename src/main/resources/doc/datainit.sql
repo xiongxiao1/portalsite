@@ -41,7 +41,11 @@ createId char(32),
 publishId char(32),
 picId char(32),
 orgId char(32),
-topflag int
+topflag int,
+topCreateTime varchar(20),
+data text,
+kind int,
+itemId
 );
 create table m_org(
 

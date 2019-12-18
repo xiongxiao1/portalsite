@@ -22,5 +22,7 @@ spring.thymeleaf.servlet.content-type: text/html
 spring.thymeleaf.encoding: utf-8
 spring.thymeleaf.mode: LEGACYHTML5
 spring.thymeleaf.cache: false
+web:
+  upload-path: E:/image/
 spring.mvc.static-path-pattern: /**
-spring.resources.static-locations: classpath:/templates/,classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+spring.resources.static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}

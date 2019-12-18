@@ -30,11 +30,12 @@
 			<!--&lt;!&ndash;菜单&ndash;&gt;-->
 			<!--<ul id="itemtree"></ul>-->
 			<div id="aa" class="easyui-accordion" region="west" style="width:20%;">
-				<div title="导航栏管理"  data-options="selected:true"  style="overflow:auto;padding:10px;">
+				<div title="导航栏管理"   style="overflow:auto;padding:10px;">
 					<ul id="itemtree"></ul>
 				</div>
-				<div title="消息动态管理" style="padding:10px;">
-					<ul></ul>
+				<div title="消息动态管理"  data-options="selected:true" style="padding:10px;">
+					<ul><a href="javascript:void(0)" onclick="createNewsContent()">消息新建</a></ul>
+					<ul>消息管理</ul>
 				</div>
 			</div>
 		<!--</div>-->
@@ -49,7 +50,7 @@
     var context = [[@{/}]];
 	//alert(context);
 	var tabs = new Array();
-    var tablesItem   = ['menuItem'];
+    var tablesItem   = ['menuItem','pageEditor'];
     $(document).ready(function(){
         //初始化树节点
         $('#itemtree').tree({
@@ -58,15 +59,21 @@
                 return node.title;
             },
             onClick: function(node){
-                opentab(node,tablesItem[0]);
+				var url =  "http://localhost:8080/itemPag"+"?rootId="+node.id;
+                opentab(node,tablesItem[0],url);
             }
         });
     });
+ 	var createNewsContent = function(){
+
+ 		var node = {id:"123123",title:"新建消息"}
+		var url =  "http://localhost:8080/itemEditor";
+		opentab(node,tablesItem[1],url);
+	}
 
     //根据根节点打开右侧内容窗口
-    var opentab = function(node,type){
+    var opentab = function(node,type,url){
 
-        var url =  "http://localhost:8080/itemPag"+"?rootId="+node.id;
         var content = '<iframe frameborder="0"  src="'+url+'" style="width:100%;height: 680px;" id="'+node.id+'"></iframe>';
 
         $('#contentTabs').tabs('add',{
