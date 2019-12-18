@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plate.portalsite.admin.dao.MenuContentMapper">
+    <resultMap type="com.plate.portalsite.common.entity.ItemContent" id="ItemContentResult">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="createdate" column="createdate"/>
+
+        <result property="publishdate" column="publishdate"/>
+
+        <result property="createId" column="createId"/>
+
+        <result property="publishId" column="publishId"/>
+
+        <result property="picId" column="picId"/>
+
+        <result property="orgId" column="orgId"/>
+
+        <result property="topflag" column="topflag"/>
+
+        <result property="topCreateTime" column="topCreateTime"/>
+
+        <result property="data" column="data"/>
+
+        <result property="itemId" column="itemId"/>
+    </resultMap>
+
+
+    <sql id="querycolumn">
+
+         id,
+         title,
+         createdate,
+         publishdate,
+         createId,
+          publishId,
+         picId,
+         orgId,
+         topflag,
+         topCreateTime,
+         data,
+         itemId
+    </sql>
+    <update id="update" parameterType="com.plate.portalsite.common.entity.ItemContent">
+
+        update m_itemContent
+        <set>
+            <if test="title != null">
+                title= #{title},
+            </if>
+            <if test="createdate != null">
+                createdate= #{createdate},
+            </if>
+            <if test="publishdate != null">
+                publishdate= #{publishdate},
+            </if>
+            <if test="picId != null">
+                picId= #{picId},
+            </if>
+            <if test="publishId != null">
+                publishId= #{publishId},
+            </if>
+            <if test="orgId != null">
+                orgId= #{orgId},
+            </if>
+            <if test="topflag != null">
+                topflag= #{topflag},
+            </if>
+            <if test="topCreateTime != null">
+                topCreateTime= #{topCreateTime},
+            </if>
+            <if test="data != null">
+                data= #{data},
+            </if>
+            <if test="itemId != null">
+                itemId= #{itemId},
+            </if>
+
+        </set>
+        where id= #{id}
+    </update>
+
+    <insert id="save" parameterType="com.plate.portalsite.common.entity.ItemContent">
+
+
+        insert into m_itemContent(
+             id,
+             title,
+             createdate,
+             publishdate,
+             createId,
+              publishId,
+             picId,
+             orgId,
+             topflag,
+             topCreateTime,
+             data,
+             itemId
+        )
+        values(
+            #{id},
+            #{title},
+            #{createdate},
+            #{publishdate},
+            #{createId},
+            #{ publishId},
+            #{picId},
+            #{orgId},
+            #{topflag},
+            #{topCreateTime},
+            #{data},
+            #{itemId}
+        )
+    </insert>
+</mapper>

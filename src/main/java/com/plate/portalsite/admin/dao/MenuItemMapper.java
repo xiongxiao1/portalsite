@@ -8,11 +8,11 @@ import java.util.List;
 @Repository
 public interface MenuItemMapper {
 
-    public List<MenuItem> getAllItem(String parentId);
+    List<MenuItem> getAllItem(String parentId);
 
-    public void save(MenuItem menuItem);
+    void save(MenuItem menuItem);
 
-    public void update(MenuItem menuItem);
+    void update(MenuItem menuItem);
 
     List<MenuItem> getMenuList(String parentId);
 }

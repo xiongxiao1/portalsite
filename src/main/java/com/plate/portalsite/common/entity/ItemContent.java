@@ -16,8 +16,7 @@ public class ItemContent {
     private String topflag;
     private String topCreateTime;
     private String data;
-
-
+    private String itemId;
     public String getId() {
         return id;
     }
@@ -104,5 +103,13 @@ public class ItemContent {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
     }
 }

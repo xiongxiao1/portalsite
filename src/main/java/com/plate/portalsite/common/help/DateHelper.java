@@ -14,4 +14,9 @@ public class DateHelper {
         SimpleDateFormat sd = new SimpleDateFormat(pattern);
         return sd.format(now.getTime());
     }
+    public static String getCurrDateStr(){
+        final Calendar now = Calendar.getInstance();
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
+        return sd.format(now.getTime());
+    }
 }

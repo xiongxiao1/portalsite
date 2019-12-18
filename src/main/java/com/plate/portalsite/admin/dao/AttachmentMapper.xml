@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plate.portalsite.admin.dao.AttachmentMapper">
+    <resultMap type="com.plate.portalsite.common.entity.Attachment" id="AttachmentResult">
+        <id property="id" column="id"/>
+        <result property="servername" column="servername"/>
+        <result property="realname" column="realname"/>
+        <result property="path" column="path"/>
+        <result property="createtime" column="createtime"/>
+        <result property="deleteFlag" column="deleteFlag"/>
+        <result property="ownId" column="ownId"/>
+    </resultMap>
+
+    <update id="update" parameterType="com.plate.portalsite.common.entity.Attachment">
+
+        update m_att
+        <set>
+            <if test="servername != null">
+                servername= #{servername},
+            </if>
+            <if test="realname != null">
+                realname= #{realname},
+            </if>
+            <if test="path != null">
+                path= #{path},
+            </if>
+            <if test="createtime != null">
+                createtime= #{createtime},
+            </if>
+            <if test="deleteFlag != null">
+                deleteFlag= #{deleteFlag},
+            </if>
+            <if test="ownId != null">
+                ownId= #{ownId},
+            </if>
+        </set>
+        where id= #{id}
+        </update>
+
+    <insert id="save" parameterType="com.plate.portalsite.common.entity.Attachment">
+        insert into m_att(
+             id,
+             servername,
+             realname,
+             path,
+             createtime ,
+             deleteFlag,
+             ownId
+        )
+        values(
+           #{id},
+            #{servername},
+            #{realname},
+            #{path},
+            #{createtime },
+            #{deleteFlag},
+            #{ownId}
+        )
+    </insert>
+</mapper>

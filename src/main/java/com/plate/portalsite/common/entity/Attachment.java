@@ -12,6 +12,7 @@ public class Attachment {
     private String createtime ;
     private String deleteFlag;
 
+    private String ownId;
     public String getId() {
         return id;
     }
@@ -58,5 +59,13 @@ public class Attachment {
 
     public void setDeleteFlag(String deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    public String getOwnId() {
+        return ownId;
+    }
+
+    public void setOwnId(String ownId) {
+        this.ownId = ownId;
     }
 }

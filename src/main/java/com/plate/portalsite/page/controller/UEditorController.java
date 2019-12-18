@@ -1,5 +1,6 @@
 package com.plate.portalsite.page.controller;
 
+import com.plate.portalsite.common.util.CommonConst;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,9 +16,9 @@ public class UEditorController {
     public void config(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("application/json");
 //        String rootPath = request.getSession().getServletContext().getRealPath("/");
-        String rootPath ="E:/image/";
+
         try {
-            String exec = new ActionEnter(request, rootPath).exec();
+            String exec = new ActionEnter(request, CommonConst.rootPath).exec();
             PrintWriter writer = response.getWriter();
             writer.write(exec);
             writer.flush();

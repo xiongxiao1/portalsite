@@ -7,6 +7,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,5 +41,15 @@ public class MenuController {
             return;
         }
         menuService.saveOrUpdate(menuItem);
+    }
+    @RequestMapping("/getContentType")
+    public List<Map<String,String>> getContentType(){
+
+        List<Map<String,String>> result = new ArrayList<>();
+        Map<String,String>item = new HashMap<>();
+        item.put("id","12f62c9b669342f4a82c0e58f906bc4f");
+        item.put("title","官方通知");
+        result.add(item);
+        return result;
     }
 }

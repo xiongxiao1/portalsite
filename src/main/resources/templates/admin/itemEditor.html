@@ -20,35 +20,43 @@
 
 <body>
 <!-- 加载编辑器的容器 -->
-<form th:action="@{/news/addNews.do}" method="post" id="itemContent">
+<form  method="post" id="itemContent" enctype="multipart/form-data">
 	<table>
 		<tr><td>消息类型</td>
-			<td><input id="itemContent_type" name="001"></td>
+			<td><input id="itemContent_type" name="itemId"></td>
 		</tr>
 		<tr>
 			<td>消息标题</td>
-			<td><input id='itemContent_title' class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px">
+			<td><input id='itemContent_title' name="title" class="easyui-textbox" data-options="iconCls:'icon-search'" style="width:300px">
 			</td>
 		</tr>
-
+        <tr>
+            <td>标题图片</td>
+            <td><input id="titleFile" name="titleFile" class="easyui-filebox" style="width:300px" data-options="multiple:false,accept:'image/jpeg'">
+            </td>
+        </tr>
 	</table>
-	<textarea id="container" name="content" type="text/plain">这里写你的初始化内容</textarea>
-	<button id="btn" name="submit">提交</button>
+	<textarea id="container" name="data" type="text/plain">这里写你的初始化内容</textarea>
+	<button id="btn" name="submit" onclick="postDate()">提交</button>
 </form>
 
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
-	$('#itemContent_type').combo({
-		required:true
+	$('#itemContent_type').combobox({
+		valueField: 'id',
+		textField: 'title',
+		url:'http://localhost:8080/getContentType'
 	});
-	$('#itemContent_type').combo('setValues',[
-		{"id":1,"name":"xiaohong1"},
-		{"id":2,"name":"xiaohong2"},
-		{"id":3,"name":"xiaohong3"},
-		{"id":4,"name":"xiaohong4"}
-	])
 	var ue = UE.getEditor('container');
 	function postDate() {
+	    $("#itemContent").form("submit",{
+			type: 'post',
+			url: 'http://localhost:8080/saveMenuContent',
+			onSubmit: function (param) {
+				console.info("123");
+			},
+			success: function (data) {}
+		});
 	}
 </script>
 </body>
