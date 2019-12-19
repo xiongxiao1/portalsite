@@ -35,7 +35,7 @@
 				</div>
 				<div title="消息动态管理"  data-options="selected:true" style="padding:10px;">
 					<ul><a href="javascript:void(0)" onclick="createNewsContent()">消息新建</a></ul>
-					<ul>消息管理</ul>
+					<ul><a href="javascript:void(0)" onclick="manageNewsContent()">消息管理</a></ul>
 				</div>
 			</div>
 		<!--</div>-->
@@ -50,7 +50,7 @@
     var context = [[@{/}]];
 	//alert(context);
 	var tabs = new Array();
-    var tablesItem   = ['menuItem','pageEditor'];
+    var tablesItem   = ['menuItem','pageEditor','contentList'];
     $(document).ready(function(){
         //初始化树节点
         $('#itemtree').tree({
@@ -71,6 +71,11 @@
 		opentab(node,tablesItem[1],url);
 	}
 
+	var manageNewsContent = function(){
+ 		var node = {id:"123124",title:"消息管理"}
+ 		var url = "http://localhost:8080/contentList";
+		opentab(node,tablesItem[2],url);
+	}
     //根据根节点打开右侧内容窗口
     var opentab = function(node,type,url){
 

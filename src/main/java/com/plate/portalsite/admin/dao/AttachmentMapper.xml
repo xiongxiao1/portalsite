@@ -13,30 +13,16 @@
         <result property="ownId" column="ownId"/>
     </resultMap>
 
-    <update id="update" parameterType="com.plate.portalsite.common.entity.Attachment">
+    <select id="getAttachmentsByOwnId" resultMap="AttachmentResult">
+        select * from m_att
+        where ownId= #{ownId}
+    </select>
+    <update id="deleteByOwnId" parameterType="string">
 
         update m_att
-        <set>
-            <if test="servername != null">
-                servername= #{servername},
-            </if>
-            <if test="realname != null">
-                realname= #{realname},
-            </if>
-            <if test="path != null">
-                path= #{path},
-            </if>
-            <if test="createtime != null">
-                createtime= #{createtime},
-            </if>
-            <if test="deleteFlag != null">
-                deleteFlag= #{deleteFlag},
-            </if>
-            <if test="ownId != null">
-                ownId= #{ownId},
-            </if>
-        </set>
-        where id= #{id}
+
+        set    ownId= #{ownId}
+        where ownId= #{ownId}
         </update>
 
     <insert id="save" parameterType="com.plate.portalsite.common.entity.Attachment">

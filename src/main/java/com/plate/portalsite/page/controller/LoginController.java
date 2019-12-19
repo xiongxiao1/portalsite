@@ -27,4 +27,8 @@ public class LoginController {
     public String itemEditor(Model model) {
         return "admin/itemEditor";
     }
+    @RequestMapping("/contentList")
+    public String contentList(Model model){
+        return "admin/contentList";
+    }
 }

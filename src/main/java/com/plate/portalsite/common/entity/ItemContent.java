@@ -10,13 +10,16 @@ public class ItemContent {
     private String createdate;
     private String publishdate;
     private String createId;
-    private String  publishId;
+    private String publishId;
+    private String pubFlag;
     private String picId;
     private String orgId;
     private String topflag;
     private String topCreateTime;
     private String data;
     private String itemId;
+
+    private String itemName;
     public String getId() {
         return id;
     }
@@ -111,5 +114,21 @@ public class ItemContent {
 
     public void setItemId(String itemId) {
         this.itemId = itemId;
+    }
+
+    public String getPubFlag() {
+        return pubFlag;
+    }
+
+    public void setPubFlag(String pubFlag) {
+        this.pubFlag = pubFlag;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }

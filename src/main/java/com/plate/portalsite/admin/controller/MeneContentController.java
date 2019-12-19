@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 消息通知 消息内容
@@ -23,7 +25,15 @@ import java.io.IOException;
 public class MeneContentController {
 
     @Autowired
-    private MenuContentService senuContentService;
+    private MenuContentService contentService;
+
+    @RequestMapping("/getItemContentList")
+    public List<Map<String,Object>> getItemContentList(String itemTypeId, String title, String dateStart, String dateEnd, int pageSize, int pageNum){
+
+        return  contentService.getItemContentList(itemTypeId,title,dateStart,dateEnd,pageSize,pageNum);
+    }
+
+
     @RequestMapping("/saveMenuContent")
     public void saveMenuContent(ItemContent itemContent, @RequestParam(value="titleFile") MultipartFile titleFile){
 
@@ -36,7 +46,7 @@ public class MeneContentController {
             e.printStackTrace();
         }
         //保存消息内容数据
-        senuContentService.saveOrUpdate(itemContent,attachment);
+        contentService.saveOrUpdate(itemContent,attachment);
     }
 
     private Attachment getAttachment(@RequestParam("titleFile") MultipartFile titleFile) throws IOException {

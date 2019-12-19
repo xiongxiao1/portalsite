@@ -25,24 +25,34 @@
         <result property="data" column="data"/>
 
         <result property="itemId" column="itemId"/>
+
+        <result property="pubFlag" column="pubFlag"/>
     </resultMap>
 
+    <select id="getItemContentList" resultMap="ItemContentResult" parameterType="map">
+        select * from m_itemContent c
+        left join  m_item i on i.id = c.itemId
+        where 1=1
+        <if test="itemTypeId != null">
 
-    <sql id="querycolumn">
+            and c.itemTypeId = #{itemTypeId}
+        </if>
+        <if test="title != null">
 
-         id,
-         title,
-         createdate,
-         publishdate,
-         createId,
-          publishId,
-         picId,
-         orgId,
-         topflag,
-         topCreateTime,
-         data,
-         itemId
-    </sql>
+            and c.title like '%'+${title}+'%'
+        </if>
+        <if test="dateStart != null">
+
+            c.createdate >= #{dateStart}
+        </if>
+        <if test="dateEnd != null">
+
+            #{dateEnd}>=c.createdate
+        </if>
+
+        order by createdate desc,pubulishdate desc
+        limit #{pageStart},#{pageEnd}
+    </select>
     <update id="update" parameterType="com.plate.portalsite.common.entity.ItemContent">
 
         update m_itemContent
@@ -77,6 +87,10 @@
             <if test="itemId != null">
                 itemId= #{itemId},
             </if>
+            <if test="pubFlag != null">
+                pubFlag = #{pubFlag},
+            </if>
+
 
         </set>
         where id= #{id}
@@ -97,7 +111,8 @@
              topflag,
              topCreateTime,
              data,
-             itemId
+             itemId,
+             pubFlag
         )
         values(
             #{id},
@@ -111,7 +126,8 @@
             #{topflag},
             #{topCreateTime},
             #{data},
-            #{itemId}
+            #{itemId},
+            #{pubFlag}
         )
     </insert>
 </mapper>

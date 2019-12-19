@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/js/easyui/themes/default/easyui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/js/easyui/themes/icon.css}">
+    <script type="text/javascript" th:src="@{/js/easyui/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/easyui/jquery.easyui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/easyui/plugins/jquery.combotree.js}"></script>
+    <script type="text/javascript" th:src="@{/js/easyui/plugins/jquery.tabs.js}"></script>
+    <script type="text/javascript" th:src="@{/js/easyui/plugins/jquery.datagrid.js}"></script>
+    <title>Title</title>
+</head>
+<body>
+<script type="application/javascript" th:inline="javascript">
+    $(document).ready(function(){
+        //获取rootId子节点数据
+        $.get("http://localhost:8080/getTabInfo", function(data){
+
+            $.get("http://localhost:8080/getTreeList?parentId="+[[${rootId}]], function(list){
+                //初始化表格
+                $('#dg').datagrid({
+                    data: list,
+                    columns:[data.tableCols],
+                    singleSelect:true,
+                    onClickRow:function(rowIndex,rowData){
+                        var keys = Object.keys(rowData);
+                        for(var i=0;i<keys.length;i++){
+                            $("#formItem_"+keys[i]).val(rowData[keys[i]]);
+                        }
+                    }
+                });
+            });
+
+            $('#pp').pagination({
+                total:2000,
+                pageSize:10
+            });
+
+            //初始化表单
+            var str = "";
+            for(var i=0;i<data.formCols.length;i++){
+                if(data.formCols[i].hidden){
+                    str += "<input id=\"" + "formItem_"+data.formCols[i].field +"\" name=\""+ data.formCols[i].field +"\" hidden=true style=\"width:300px\" class='formItem'>";
+                }else {
+                    str += "<tr>\n" +
+                        "        <td>"+data.formCols[i].title+"</td>\n" +
+                        "        <td><input id=\"" + "formItem_"+data.formCols[i].field +"\" name=\""+ data.formCols[i].field +"\"  style=\"width:300px\" class='formItem'></td>\n" +
+                        "    </tr>";
+                }
+            }
+            $('#formTab').html(str);
+        });
+
+        $('#mb').menubutton({
+            iconCls: 'icon-edit',
+            menu: '#mm'
+        });
+    });
+
+    //保存
+    function submitData() {
+
+        var inputs = $(".formItem");
+        console.info(inputs);
+        var urlParams = "?";
+        for (var i=0;i<inputs.length;i++) {
+
+            var name = inputs[i].name;
+            var value = inputs[i].value;
+            urlParams = urlParams+name+"="+value+"&";
+        }
+        var parentId = [[${rootId}]];
+        urlParams += "parentId="+parentId;
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/saveOrUpdateMenuItem"+urlParams,
+            success: function(msg){
+                //刷新table
+                $('#dg').datagrid('reload',"http://localhost:8080/getTreeList?parentId="+[[${rootId}]]);
+
+                parent.$("#itemtree").tree('reload');
+            }
+        });
+    }
+    //删除
+    function deleteData() {
+        var inputs = $(".formItem,name=[id]")
+        $.messager.confirm('Confirm','此操作会删除节点下的子节点?',function(r){
+            if (r){
+                alert('ok');
+            }
+        });
+    }
+</script>
+<!--功能按钮-->
+<div>
+    <a id="btnAdd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add' ">新建</a>
+    <a id="btnUpdate" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-update'" >修改</a>
+    <a id="btnSave" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="submitData()">保存</a>
+    <a id="btnDelete" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-delete'"  onclick="deleteData()">删除</a>
+    <a id="btnSearch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
+</div>
+<!--数据表格-->
+<table id="dg">
+</table>
+<div id="pp" style="background:#efefef;border:1px solid #ccc;"></div>
+
+<!--表单-->
+<table style="margin-top: 20px" id = "formTab">
+</table>
+</body>
+</html>

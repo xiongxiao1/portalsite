@@ -45,7 +45,8 @@ topflag int,
 topCreateTime varchar(20),
 data text,
 kind int,
-itemId
+itemId char(32),
+pubFlag char(1)
 );
 create table m_org(
 
