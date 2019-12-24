@@ -31,4 +31,8 @@ public class LoginController {
     public String contentList(Model model){
         return "admin/contentList";
     }
+    @RequestMapping("/index")
+    public String index(Model model){
+        return "csda";
+    }
 }

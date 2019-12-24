@@ -70,10 +70,12 @@ public class MenuContentService {
         List<ItemContent>list = menuContentMapper.getItemContentList(params);
 
         List<Map<String,Object>> result = new ArrayList<>();
+        int i=1;
         for (ItemContent itemContent:
         list) {
 
             HashMap<String, Object> stringObjectHashMap = new HashMap<>();
+            stringObjectHashMap.put("num",i++);
             stringObjectHashMap.put("id",itemContent.getId());
             stringObjectHashMap.put("title",itemContent.getTitle());
             stringObjectHashMap.put("data",itemContent.getData());
