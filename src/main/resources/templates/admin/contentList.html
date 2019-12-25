@@ -16,13 +16,18 @@
 <script type="application/javascript" th:inline="javascript">
     $(document).ready(function(){
         //获取rootId子节点数据
-        $.get("http://localhost:8080/getTabInfo", function(data){
+        $.get("http://localhost:8080/getTabInfo?type=content", function(data){
 
-            $.get("http://localhost:8080/getTreeList?parentId="+[[${rootId}]], function(list){
+            $.get("http://localhost:8080/getItemContentList?pageSize=10&pageNum=1", function(list){
                 //初始化表格
                 $('#dg').datagrid({
                     data: list,
-                    columns:[data.tableCols],
+                    columns:[{field:"id",title:"id",hidden:true},
+                        {field:"num",width:300,title:"序号"},
+                        {field:"title",width:300,title:"标题"},
+                        {field:"pubFlag",width:300,title:"是否发布"},
+                        {field:"publishDate",width:300,title:"发布日期"},
+                        {field:"itemName",width:300,title:"消息类型"}],
                     singleSelect:true,
                     onClickRow:function(rowIndex,rowData){
                         var keys = Object.keys(rowData);
@@ -34,23 +39,9 @@
             });
 
             $('#pp').pagination({
-                total:2000,
-                pageSize:10
+                total:data.total,
+                pageSize:data.size
             });
-
-            //初始化表单
-            var str = "";
-            for(var i=0;i<data.formCols.length;i++){
-                if(data.formCols[i].hidden){
-                    str += "<input id=\"" + "formItem_"+data.formCols[i].field +"\" name=\""+ data.formCols[i].field +"\" hidden=true style=\"width:300px\" class='formItem'>";
-                }else {
-                    str += "<tr>\n" +
-                        "        <td>"+data.formCols[i].title+"</td>\n" +
-                        "        <td><input id=\"" + "formItem_"+data.formCols[i].field +"\" name=\""+ data.formCols[i].field +"\"  style=\"width:300px\" class='formItem'></td>\n" +
-                        "    </tr>";
-                }
-            }
-            $('#formTab').html(str);
         });
 
         $('#mb').menubutton({
@@ -59,6 +50,11 @@
         });
     });
 
+    function formatOper(val, row, index) {
+        return '<a href="javascript:void(0)" onclick="showUser(' + index
+            + ')">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" οnclick="editTeacher(' + index
+            + ')">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" οnclick="dele()">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    }
     //保存
     function submitData() {
 

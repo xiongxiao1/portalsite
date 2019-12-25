@@ -33,7 +33,6 @@ public class MeneContentController {
         return  contentService.getItemContentList(itemTypeId,title,dateStart,dateEnd,pageSize,pageNum);
     }
 
-
     @RequestMapping("/saveMenuContent")
     public void saveMenuContent(ItemContent itemContent, @RequestParam(value="titleFile") MultipartFile titleFile){
 

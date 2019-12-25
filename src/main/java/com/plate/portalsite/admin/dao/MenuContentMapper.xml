@@ -26,11 +26,13 @@
 
         <result property="itemId" column="itemId"/>
 
+        <result property="itemName" column="itemName"/>
+
         <result property="pubFlag" column="pubFlag"/>
     </resultMap>
 
     <select id="getItemContentList" resultMap="ItemContentResult" parameterType="map">
-        select * from m_itemContent c
+        select c.*,i.title as itemName from m_itemContent c
         left join  m_item i on i.id = c.itemId
         where 1=1
         <if test="itemTypeId != null">
@@ -50,7 +52,7 @@
             #{dateEnd}>=c.createdate
         </if>
 
-        order by createdate desc,pubulishdate desc
+        order by createdate desc,publishdate desc
         limit #{pageStart},#{pageEnd}
     </select>
     <update id="update" parameterType="com.plate.portalsite.common.entity.ItemContent">

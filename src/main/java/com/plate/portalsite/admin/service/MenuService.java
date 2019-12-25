@@ -18,8 +18,6 @@ import java.util.Map;
 @Service
 public class MenuService {
 
-
-    static String ROOTID = "00000000000000000000000000000000";
     @Autowired
     private  MenuItemMapper menuItemMapper;
 
@@ -46,9 +44,7 @@ public class MenuService {
                 item.put("children", createTreeList(menuItem,data));
                 result.add(item);
             }
-
         }
-
     }
 
     public List<Map<String,Object>> createTreeList(MenuItem parent,List<MenuItem> data){
@@ -56,7 +52,7 @@ public class MenuService {
         List<Map<String,Object>> result = new ArrayList<>();
 
         for (MenuItem menuItem: data){
-            if(menuItem.getParentId().equals(parent.getId())){
+            if(parent.getId().equals(menuItem.getParentId())){
                 HashMap<String, Object> item = new HashMap<>();
                 item.put("id",menuItem.getId());
                 item.put("title",menuItem.getTitle());

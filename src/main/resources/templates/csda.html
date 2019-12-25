@@ -28,6 +28,19 @@
 	    	var domainCtx = getDomainCtx();
 	    	window.open(domainCtx + "/pc-web/management/login.jsp");
 	    }
+        // $(document).ready(function(){
+        //     $.ajax({
+        //         type : "POST",
+        //         url : "http://127.0.0.1/admin/list/",
+        //         data : {id:123,name:"asdasd"},
+        //         success : function(result) {
+        //             console.log(result);
+        //         }
+        //     });
+        // });
+        function loadDiv(itemId) {
+            alert(itemId);
+        }
     </script>
 </head>
 
@@ -46,64 +59,75 @@
     <nav>
         <div class="index_nav">
             <ul class="nav_ul">
-                <li class="nav_li">
-                    <a class="nav_active nav_li_a" href="javascript:">首页</a>
-                </li>
-                <li class="nav_li">
-                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html">组织简介</a>
-                    <ul>
-                        <li>
-                            <a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=0">CSDA简介</a>
-                        </li>
-                        <li>
-                            <a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=1">CSDA章程</a>
-                        </li>
-                        <li>
-                            <a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=2">组织架构</a>
-                        </li>
-                        <li>
-                            <a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=3">总委会</a>
-                        </li>
+                <li class="nav_li" th:each="item:${allItem[0].children}">
+                    <a class="nav_active nav_li_a" th:text="${item.title}" th:id="${item.id}" href="javascript:"></a>
+
+                    <ul th:if="${item.children.size() != 0}">
+                        <li th:each="item2:${item.children}">
+                            <a th:text="${item2.title}" th:id="${item2.id}" ></a></li>
                     </ul>
-                </li>
-                <li class="nav_li">
-                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/notice/notice.html">官方文件</a>
-                    <ul>
-                        <li>
-                            <a href="http://www.csda.cn.com/csda/webPC/notice/notice.html?index=0">官方通知</a>
-                        </li>
-                        <li>
-                            <a href="http://www.csda.cn.com/csda/webPC/notice/notice.html?index=1">红头文件</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav_li">
-                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/rules/rules.html">规章制度</a>
-                </li>
-                <li class="nav_li">
-                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/sub_committee/sub_committee_list.html">分委会</a>
-                </li>
-                <li class="nav_li">
-                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_dynamics.html">委员会动态</a>
-                </li>
-                <li class="nav_li">
-                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html">资质查询</a>
-                    <ul>
-                        <li>
-                            <a href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html?index=0">机构查询</a>
-                        </li>
-                        <li>
-                            <a href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html?index=1">证件查询</a>
-                        </li>
-                        <li>
-                            <a href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html?index=2">证书查询</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav_li">
-                    <a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/development_history/development_history.html">发展历程</a>
                 </li>
             </ul>
+
+            <!--<ul class="nav_ul">-->
+                <!--<li class="nav_li">-->
+                    <!--<a class="nav_active nav_li_a" href="javascript:">首页</a>-->
+                <!--</li>-->
+                <!--<li class="nav_li">-->
+                    <!--<a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html">组织简介</a>-->
+                    <!--<ul>-->
+                        <!--<li>-->
+                            <!--<a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=0">CSDA简介</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=1">CSDA章程</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=2">组织架构</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="http://www.csda.cn.com/csda/webPC/organization_intro/introduction.html?index=3">总委会</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav_li">-->
+                    <!--<a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/notice/notice.html">官方文件</a>-->
+                    <!--<ul>-->
+                        <!--<li>-->
+                            <!--<a href="http://www.csda.cn.com/csda/webPC/notice/notice.html?index=0">官方通知</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="http://www.csda.cn.com/csda/webPC/notice/notice.html?index=1">红头文件</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav_li">-->
+                    <!--<a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/rules/rules.html">规章制度</a>-->
+                <!--</li>-->
+                <!--<li class="nav_li">-->
+                    <!--<a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/sub_committee/sub_committee_list.html">分委会</a>-->
+                <!--</li>-->
+                <!--<li class="nav_li">-->
+                    <!--<a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/committee_dynamics/committee_dynamics.html">委员会动态</a>-->
+                <!--</li>-->
+                <!--<li class="nav_li">-->
+                    <!--<a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html">资质查询</a>-->
+                    <!--<ul>-->
+                        <!--<li>-->
+                            <!--<a href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html?index=0">机构查询</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html?index=1">证件查询</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="http://www.csda.cn.com/csda/webPC/qualification_inquiry/qualification_inquiry.html?index=2">证书查询</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="nav_li">-->
+                    <!--<a class=" nav_li_a" href="http://www.csda.cn.com/csda/webPC/development_history/development_history.html">发展历程</a>-->
+                <!--</li>-->
+            <!--</ul>-->
         </div>
     </nav>
     <!--导航结束-->
