@@ -17,6 +17,7 @@ public class SysInfoController {
     @RequestMapping("getTabInfo")
     public Map<String, Object> getTabInfo(String type){
 
+
         Map<String,Object>result = new HashMap<>();
         String[] fieldCols = null;
         String[] titleCols = null;

@@ -60,7 +60,6 @@
             and c.itemTypeId = #{itemTypeId}
         </if>
         <if test="title != null">
-
             and c.title like '%'+${title}+'%'
         </if>
         <if test="dateStart != null">
