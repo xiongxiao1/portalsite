@@ -22,28 +22,28 @@ function initConfig(){
     if(_debug && _callStatu){//调过就不再调用
     	return;
     }
-	 $.ajax({
-	        type : "POST",  //提交方式POST/GET
-	        url : getContextPath() + "/config/getGlobalConfig.spv",//路径
-	        dataType : "json",
-	        async:false, 
-	        contentType:"application/json; charset=utf-8",
-	        /*data : JSON.stringify({
-				"id":id,
-				"status":value
-	        }),*/
-	        success : function(result) {//返回数据根据结果进行相应的处理
-	        	if(result.resultCode = "success"){
-	        		_configObj = result.values;
-	        	}else{
-	        		var resultMessage = result.resultMessage;
-	        		alert(resultMessage);
-	        	}
-	        },error : function(e) {
-	            alert("加载配置信息失败!");
-	        }
-	    });
-	 _callStatu = true;
+	 // $.ajax({
+	 //        type : "POST",  //提交方式POST/GET
+	 //        url : getContextPath() + "/config/getGlobalConfig.spv",//路径
+	 //        dataType : "json",
+	 //        async:false,
+	 //        contentType:"application/json; charset=utf-8",
+	 //        /*data : JSON.stringify({
+		// 		"id":id,
+		// 		"status":value
+	 //        }),*/
+	 //        success : function(result) {//返回数据根据结果进行相应的处理
+	 //        	if(result.resultCode = "success"){
+	 //        		_configObj = result.values;
+	 //        	}else{
+	 //        		var resultMessage = result.resultMessage;
+	 //        		alert(resultMessage);
+	 //        	}
+	 //        },error : function(e) {
+	 //            alert("加载配置信息失败!");
+	 //        }
+	 //    });
+	 // _callStatu = true;
 	 
 }
 /**

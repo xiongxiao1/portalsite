@@ -17,4 +17,6 @@ public interface MenuContentMapper {
     List<ItemContent> getItemContentList(Map<String, Object> params);
 
     List<ItemContent> getItemContentPage(@Param("itemId") String itemId, @Param("startIndex")int startIndex,  @Param("endIndex")int endIndex);
+
+    ItemContent getItemContentById(@Param("id") String id);
 }

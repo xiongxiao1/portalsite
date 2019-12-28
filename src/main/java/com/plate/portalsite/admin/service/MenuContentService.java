@@ -97,4 +97,9 @@ public class MenuContentService {
         List<ItemContent>list = menuContentMapper.getItemContentPage(itemId,(pageNum-1)*pageSize,pageNum*pageSize);
         return list;
     }
+
+    public ItemContent getItemContentById(String id) {
+
+        return menuContentMapper.getItemContentById(id);
+    }
 }

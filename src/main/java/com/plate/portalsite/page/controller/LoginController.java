@@ -51,7 +51,7 @@ public class LoginController {
         return "admin/contentList";
     }
     @RequestMapping(value ={"/index/{id}","/index"} )
-    public String csdaPage(HttpServletRequest request, @PathVariable(value="id",required=false) String id){
+    public String csdaPage(HttpServletRequest request, @PathVariable(value="id",required=false) String id, String itemcontentId){
 
         List<Map<String, Object>> allItem = menuService.getMenuTree(CommonConst.rootId);
 
@@ -64,6 +64,10 @@ public class LoginController {
                 isFirstPage = 1;
         }
 
+        //做详情页处理
+        if(!StringUtils.isEmpty(itemcontentId)){
+            isFirstPage = 2;
+        }
         HashMap<String, Object> result = new HashMap<>();
         if(isFirstPage == 0){ //首页
 
@@ -87,8 +91,12 @@ public class LoginController {
             result.put("htwjs",htwjs);
             result.put("htwj",htwj);
 
-        }else if(isFirstPage == 1){//非首页
-            request.setAttribute("divData", data);
+        }else if(isFirstPage == 1){//菜单自带内容页
+            request.setAttribute("menuData", data);
+        }else if(isFirstPage == 2){//内容详细页
+
+            ItemContent menuContent = menuContentService.getItemContentById(itemcontentId);
+            request.setAttribute("menuContentData", menuContent.getData());
         }
 
         request.setAttribute("result", result);

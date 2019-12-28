@@ -35,6 +35,12 @@
         </collection>
     </resultMap>
 
+    <select id="getItemContentById" resultMap="ItemContentResult">
+
+        select * from m_itemContent
+        where id = #{id}
+    </select>
+
     <select id="getItemContentPage" resultMap="ItemContentResult">
         select ic.*,a.id a_id,a.servername a_servername from m_itemContent ic
         left join m_att a on a.ownId = ic.id
