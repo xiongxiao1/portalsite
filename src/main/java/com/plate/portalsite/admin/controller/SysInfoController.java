@@ -22,8 +22,8 @@ public class SysInfoController {
         String[] titleCols = null;
         if(!StringUtils.isEmpty(type)){
             if(type.equals("item")) {
-                fieldCols = new String[]{"num", "id", "title", "code", "enTitle", "description", "kind"};
-                titleCols = new String[]{"序号", "id", "标题", "编码", "英文标题", "描述", "类型"};
+                fieldCols = new String[]{"num", "id","data", "title", "code", "enTitle", "description", "kind"};
+                titleCols = new String[]{"序号", "id","data", "标题", "编码", "英文标题", "描述", "类型"};
                 //表格
                 createTableCols(result, fieldCols, titleCols);
                 //表单
@@ -49,7 +49,7 @@ public class SysInfoController {
             item.put("field",fieldCols[i]);
             item.put("title",titleCols[i]);
             item.put("width",300);
-            if(i==1)
+            if(i==1 || i==2)
                 item.put("hidden",true);
             else
                 item.put("hidden",false);
@@ -65,7 +65,7 @@ public class SysInfoController {
             item.put("field",fieldCols[i]);
             item.put("title",titleCols[i]);
             item.put("width",100);
-            if( i==1){
+            if( i==1 || i==2){
                 item.put("hidden",true);
             }
             tableCols.add(item);

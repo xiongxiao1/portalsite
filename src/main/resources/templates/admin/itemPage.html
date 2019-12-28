@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/js/easyui/themes/default/easyui.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/js/easyui/themes/icon.css}">
+    <!-- 配置文件 -->
+    <script type="text/javascript"   th:src="@{/ueditor/ueditor.config.js}"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript"  th:src="@{/ueditor/ueditor.all.js}"></script>
+    <script type="text/javascript"  th:src="@{/ueditor/ueditor.all.js}"></script>
     <script type="text/javascript" th:src="@{/js/easyui/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/easyui/jquery.easyui.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/easyui/plugins/jquery.combotree.js}"></script>
@@ -25,10 +30,18 @@
                     columns:[data.tableCols],
                     singleSelect:true,
                     onClickRow:function(rowIndex,rowData){
+
                         var keys = Object.keys(rowData);
-                        for(var i=0;i<keys.length;i++){
+                        console.info(keys);
+                        for(var i=0;i<keys.length-1;i++){
                             $("#formItem_"+keys[i]).val(rowData[keys[i]]);
+
                         }
+                        var ue = UE.getEditor('containerItem');
+                        if(rowData.data == null )
+                            ue.setContent("");
+                        else
+                            ue.setContent(rowData.data);
                     }
                 });
             });
@@ -53,6 +66,8 @@
             $('#formTab').html(str);
 
         });
+        //初始化标签
+        var ue = UE.getEditor('containerItem');
 
         $('#mb').menubutton({
             iconCls: 'icon-edit',
@@ -63,20 +78,10 @@
     //保存
     function submitData() {
 
-        var inputs = $(".formItem");
-        console.info(inputs);
-        var urlParams = "?";
-        for (var i=0;i<inputs.length;i++) {
-
-            var name = inputs[i].name;
-            var value = inputs[i].value;
-            urlParams = urlParams+name+"="+value+"&";
-        }
-        var parentId = [[${rootId}]];
-        urlParams += "parentId="+parentId;
         $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/saveOrUpdateMenuItem"+urlParams,
+            type: "post",
+            url: "http://localhost:8080/saveOrUpdateMenuItem",
+            data: $("#itemForm").serialize(),
             success: function(msg){
                 //刷新table
                 $('#dg').datagrid('reload',"http://localhost:8080/getTreeList?parentId="+[[${rootId}]]);
@@ -109,7 +114,11 @@
 <div id="pp" style="background:#efefef;border:1px solid #ccc;"></div>
 
 <!--表单-->
-<table style="margin-top: 20px" id = "formTab">
-</table>
+<form id  = "itemForm">
+    <input type="hidden" name="parentId" th:value = "${rootId}"/>
+    <table style="margin-top: 20px" id = "formTab">
+    </table>
+    <textarea id="containerItem" name="data" type="text/plain">这里写你的初始化内容</textarea>
+</form>
 </body>
 </html>

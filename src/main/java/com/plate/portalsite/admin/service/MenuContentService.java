@@ -4,6 +4,7 @@ import com.plate.portalsite.admin.dao.AttachmentMapper;
 import com.plate.portalsite.admin.dao.MenuContentMapper;
 import com.plate.portalsite.common.entity.Attachment;
 import com.plate.portalsite.common.entity.ItemContent;
+import com.plate.portalsite.common.entity.MenuItem;
 import com.plate.portalsite.common.help.DateHelper;
 import com.plate.portalsite.common.help.EvnHelper;
 import com.plate.portalsite.common.help.UUIDHelper;
@@ -32,10 +33,12 @@ public class MenuContentService {
             itemContent.setCreateId(EvnHelper.getCurrCurrLoginId());
             menuContentMapper.save(itemContent);
             //保存附件
-            attachment.setId(UUIDHelper.newUUID());
-            attachment.setOwnId(itemContent.getId());
-            attachment.setDeleteFlag("0");
-            attachmentMapper.save(attachment);
+            if(attachment != null){
+                attachment.setId(UUIDHelper.newUUID());
+                attachment.setOwnId(itemContent.getId());
+                attachment.setDeleteFlag("0");
+                attachmentMapper.save(attachment);
+            }
         }else{
             menuContentMapper.update(itemContent);
             if(attachment != null){
@@ -87,5 +90,11 @@ public class MenuContentService {
             result.add(stringObjectHashMap);
         }
         return result;
+    }
+
+    public List<ItemContent> getItemContentPage(String itemId, int pageNum, int pageSize) {
+
+        List<ItemContent>list = menuContentMapper.getItemContentPage(itemId,(pageNum-1)*pageSize,pageNum*pageSize);
+        return list;
     }
 }

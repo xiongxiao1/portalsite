@@ -15,4 +15,8 @@ public interface MenuItemMapper {
     void update(MenuItem menuItem);
 
     List<MenuItem> getMenuList(String parentId);
+
+    List<MenuItem> getItemByType(String kind);
+
+    MenuItem getItemById(String id);
 }

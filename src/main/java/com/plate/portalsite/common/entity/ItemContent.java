@@ -1,5 +1,7 @@
 package com.plate.portalsite.common.entity;
 
+import java.util.List;
+
 /**
  * 动态消息， 官方通知，红头文件
  */
@@ -20,6 +22,8 @@ public class ItemContent {
     private String itemId;
 
     private String itemName;
+
+    private List<Attachment> atts;
     public String getId() {
         return id;
     }
@@ -130,5 +134,13 @@ public class ItemContent {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    public List<Attachment> getAtts() {
+        return atts;
+    }
+
+    public void setAtts(List<Attachment> atts) {
+        this.atts = atts;
     }
 }

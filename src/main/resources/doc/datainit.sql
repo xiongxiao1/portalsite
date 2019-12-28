@@ -70,8 +70,9 @@ servername varchar(100) not null,
 realname varchar(100),
 path varchar(100),
 createtime char(20),
-deleteFlag CHAR(1)
+deleteFlag CHAR(1),
+ownId char(32)
 );
-
+alter table m_item add data text;
 insert into m_item (id,title,entitle,kind,enableflag,ordernum,description,createtime,code)
 values('00000000000000000000000000000000','root','root',0,1,0,'description','2019-12-03 00:43:00',"00")

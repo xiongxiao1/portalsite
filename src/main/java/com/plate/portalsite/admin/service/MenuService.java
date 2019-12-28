@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.thymeleaf.util.DateUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class MenuService {
@@ -38,7 +35,7 @@ public class MenuService {
         for (MenuItem menuItem : data){
 
             if( StringUtils.isEmpty(menuItem.getParentId()) ){
-                HashMap<String, Object> item = new HashMap<>();
+                HashMap<String, Object> item = new LinkedHashMap<>();
                 item.put("id",menuItem.getId());
                 item.put("title",menuItem.getTitle());
                 item.put("children", createTreeList(menuItem,data));
@@ -53,7 +50,7 @@ public class MenuService {
 
         for (MenuItem menuItem: data){
             if(parent.getId().equals(menuItem.getParentId())){
-                HashMap<String, Object> item = new HashMap<>();
+                HashMap<String, Object> item = new LinkedHashMap<>();
                 item.put("id",menuItem.getId());
                 item.put("title",menuItem.getTitle());
                 item.put("children", createTreeList(menuItem,data));
@@ -101,7 +98,7 @@ public class MenuService {
         int i=1;
         for (MenuItem menuItem : list){
 
-            Map<String, Object> item = new HashMap<>();
+            Map<String, Object> item = new LinkedHashMap<>();
             item.put("id",menuItem.getId());
             item.put("num",i);
             item.put("title",menuItem.getTitle());
@@ -109,9 +106,27 @@ public class MenuService {
             item.put("enTitle",menuItem.getEnTitle());
             item.put("description",menuItem.getDescription());
             item.put("kind",menuItem.getKind());
+            item.put("data",menuItem.getData());
             result.add(item);
             i++;
         }
         return result;
+    }
+
+    public List<Map<String, String>> getContentType(String typeNoticekind) {
+        List<Map<String,String>>result= new ArrayList<>();
+        List<MenuItem> data = menuItemMapper.getItemByType(typeNoticekind);
+        for (MenuItem menuItem : data){
+
+            Map<String,String>item = new HashMap<>();
+            item.put("id",menuItem.getId());
+            item.put("title",menuItem.getTitle());
+            result.add(item);
+        }
+        return result;
+    }
+
+    public MenuItem getItemById(String id) {
+        return menuItemMapper.getItemById(id);
     }
 }

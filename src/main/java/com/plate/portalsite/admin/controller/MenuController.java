@@ -2,6 +2,7 @@ package com.plate.portalsite.admin.controller;
 
 import com.plate.portalsite.admin.service.MenuService;
 import com.plate.portalsite.common.entity.MenuItem;
+import com.plate.portalsite.common.util.CommonConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,6 @@ public class MenuController {
     //获取当前节点的所有子节点
     @RequestMapping("/getTreeList")
     public List<Map<String, Object>> getTreeList(String parentId){
-
-
         return menuService.getTreeList(parentId);
     }
 
@@ -40,16 +39,15 @@ public class MenuController {
         if(StringUtils.isEmpty(menuItem.getParentId())){
             return;
         }
+        if(!StringUtils.isEmpty(menuItem.getData()))
+            menuItem.setData(menuItem.getData().substring(1,menuItem.getData().length()));
         menuService.saveOrUpdate(menuItem);
     }
     @RequestMapping("/getContentType")
     public List<Map<String,String>> getContentType(){
 
-        List<Map<String,String>> result = new ArrayList<>();
-        Map<String,String>item = new HashMap<>();
-        item.put("id","12f62c9b669342f4a82c0e58f906bc4f");
-        item.put("title","官方通知");
-        result.add(item);
+
+        List<Map<String,String>>result= menuService.getContentType(CommonConst.TYPE_NOTICEKIND);
         return result;
     }
 }

@@ -20,6 +20,9 @@ public class MenuItem {
     private int ordernum;
 
     private String code;
+    //标题自带消息内容
+    private String data;
+
 
     public String getId() {
         return id;
@@ -125,31 +128,19 @@ public class MenuItem {
         this.ordernum = ordernum;
     }
 
-    @Override
-    public String toString() {
-        return "MenuItem{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", enTitle='" + enTitle + '\'' +
-                ", description='" + description + '\'' +
-                ", kind=" + kind +
-                ", createtime='" + createtime + '\'' +
-                ", createuserid='" + createuserid + '\'' +
-                ", updatetime='" + updatetime + '\'' +
-                ", updateuserid='" + updateuserid + '\'' +
-                ", urladdr='" + urladdr + '\'' +
-                ", parentId='" + parentId + '\'' +
-                ", enableflag=" + enableflag +
-                ", ordernum=" + ordernum +
-                ", code='" + code + '\'' +
-                '}';
-    }
-
     public String getCode() {
         return code;
     }
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

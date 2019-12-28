@@ -28,8 +28,22 @@
 
         <result property="itemName" column="itemName"/>
 
-        <result property="pubFlag" column="pubFlag"/>
+        <result property="pubFlag" column="pubFlag" />
+        <collection property="atts" column="atts" javaType="ArrayList" ofType="com.plate.portalsite.common.entity.Attachment">
+            <id property="id" column="a_id"></id>
+            <result property="servername" column="a_servername"></result>
+        </collection>
     </resultMap>
+
+    <select id="getItemContentPage" resultMap="ItemContentResult">
+        select ic.*,a.id a_id,a.servername a_servername from m_itemContent ic
+        left join m_att a on a.ownId = ic.id
+        where 1=1
+        <if test="itemId != null">
+            and itemId = #{itemId}
+        </if>
+        limit ${startIndex},${endIndex}
+    </select>
 
     <select id="getItemContentList" resultMap="ItemContentResult" parameterType="map">
         select c.*,i.title as itemName from m_itemContent c
