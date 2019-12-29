@@ -94,12 +94,30 @@ public class MenuContentService {
 
     public List<ItemContent> getItemContentPage(String itemId, int pageNum, int pageSize) {
 
-        List<ItemContent>list = menuContentMapper.getItemContentPage(itemId,(pageNum-1)*pageSize,pageNum*pageSize);
+        int startIndex =(pageNum-1)*pageSize;
+        List<ItemContent>list = menuContentMapper.getItemContentPage(itemId,startIndex,pageSize);
         return list;
     }
 
     public ItemContent getItemContentById(String id) {
 
         return menuContentMapper.getItemContentById(id);
+    }
+
+    public Map<String, Object> getItemContentPageData(String itemId, int pageNum, int pageSize) {
+
+
+        Map<String, Object> result = new HashMap<>();
+
+        List<ItemContent> itemContentPage = this.getItemContentPage(itemId, pageNum, pageSize);
+        long total  = this.getPageCount(itemId);
+        result.put("itemContents",itemContentPage);
+        result.put("totalCount",total);
+        return result;
+    }
+
+    private long getPageCount(String itemId) {
+
+        return menuContentMapper.getItemContentPageContent(itemId);
     }
 }

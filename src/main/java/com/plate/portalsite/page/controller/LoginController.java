@@ -57,11 +57,16 @@ public class LoginController {
 
         String data = "";
         int isFirstPage = 0;
+        MenuItem item = null;
+
         if(!StringUtils.isEmpty(id)){
-            MenuItem item = menuService.getItemById(id);
+
+            item = menuService.getItemById(id);
             data = item.getData();
             if (!"01".equals(item.getCode()))
                 isFirstPage = 1;
+        }else{
+            item = menuService.getItemById("b38d68e2e28a46a38b0f2675f93f0b43");
         }
 
         //做详情页处理
@@ -69,12 +74,13 @@ public class LoginController {
             isFirstPage = 2;
         }
         HashMap<String, Object> result = new HashMap<>();
+        int pageNum = 1;
+        int pageSize = 6;
         if(isFirstPage == 0){ //首页
 
             //获取最新动态6 官方通知 7个，红头文件 10个，
             MenuItem wyhdt = menuService.getItemById("fe833d68e4e4451b982bdced661dcb0f");//官方通知
-            int pageNum = 1;
-            int pageSize = 6;
+
             List<ItemContent> wyhdts =menuContentService.getItemContentPage(wyhdt.getId(),pageNum,pageSize);
             result.put("wyhdts",wyhdts);
             result.put("wyhdt",wyhdt);
@@ -93,12 +99,14 @@ public class LoginController {
 
         }else if(isFirstPage == 1){//菜单自带内容页
             request.setAttribute("menuData", data);
+
         }else if(isFirstPage == 2){//内容详细页
 
             ItemContent menuContent = menuContentService.getItemContentById(itemcontentId);
             request.setAttribute("menuContentData", menuContent.getData());
         }
 
+        request.setAttribute("currItem",item);
         request.setAttribute("result", result);
         request.setAttribute("isFirstPage", isFirstPage);
         request.setAttribute("allItem", allItem);

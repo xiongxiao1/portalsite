@@ -240,7 +240,7 @@ main{
 /*官方通知开始*/
 .notice{
     background: white;
-    height:550px;
+    height: 500px;
 }
 .notice_box{
     width: 1000px;

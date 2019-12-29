@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./csda_files/public.css}" th:href="@{/csda_files/public.css}">
     <link rel="stylesheet" href="./csda_files/index.css}" th:href="@{/csda_files/index.css}">
     <link rel="stylesheet" href="./csda_files/reset.css}" th:href="@{/csda_files/reset.css}">
+    <link rel="stylesheet" href="./csda_files/pager.css" th:href="@{/csda_files/pagination.css}">
     <!--[if lt IE 9]>
     <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
     <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -23,16 +24,138 @@
     <script th:src="@{/csda_files/jquery.min.js}"></script>
     <script th:src="@{/csda_files/bootstrap.min.js}"></script>
     <script th:src="@{/csda_files/global.js}"></script>
-    <script type="text/javascript">
+    <script th:src="@{/js/pagination.js}"></script>
+    <script type="text/javascript" th:inline="javascript">
         function managementLogin() {
             var domainCtx = getDomainCtx();
             window.open(domainCtx + "/pc-web/management/login.jsp");
         }
 
-        function loadDiv(itemId) {
-            alert(itemId);
+        function loadItemContent(itemContents){
+            $('#mainItem').html("");
+            var strHtml = "";
+            if(itemContents.length>0)
+                strHtml+="<div class=\"notice_box\">\n" +
+                    "                <h2>"+[[${currItem.title}]]+"</h2>\n" +
+                    "                <div class=\"main_notice_box\">\n" +
+                    "                    <div class=\"notice_main_ul\">\n" +
+                    "                        <ul class=\"notice_right_ul\"  data-id=\"2c91e8f3607d7d2601608b68182f002b\">\n";
+
+            for(var i=0;i<itemContents.length;i++){
+                strHtml += "<li class=\"notice_main_li\" >\n" ;
+                strHtml += " <div class=\"notice_main_li_left verti\">\n" ;
+                strHtml += " &middot;<a href=\"http://localhost:8080/index/"+[[${currItem.id}]]+"?itemcontentId="+itemContents[i].id+"\">"+itemContents[i].title+"</a>\n" ;
+                strHtml += "</div>\n" ;
+                strHtml += "<div class=\"notice_main_li_right verti\">\n" ;
+                strHtml += "2019-12-13\n" ;
+                strHtml += "</div>\n" ;
+                strHtml += "</li>"
+            }
+            strHtml +="\n" +
+                    "                        </ul>\n" +
+                    "                    </div>\n" +
+                    "                </div>\n" +
+                    "            </div>";
+            $('#mainItem').html(strHtml);
         }
+        $(document).ready(function() {
+            // if([[${isFirstPage}]]==1){
+                $('#wrapper').pagination({
+                        dataSource: "http://localhost:8080/getItemContentPage?itemId="+[[${currItem.id}]], //请求的url
+                        locator: 'result.itemContents', //返回值data的位置
+                        totalNumberLocator: function (res) { //返回值总数量的位置
+                            return Math.floor(res.totalCount);
+                        },
+                        numPerPage: 10,
+                        pageRange: 1,
+                        className: '',
+                        hideWhenLessThanOnePage:true,
+                        prevText: '<&nbsp;上一页',
+                        nextText: '下一页&nbsp;>',
+                        showGoInput: false,
+                        showGoButton: false,
+                        callback: function (result, pagination) {   //回掉函数
+                            console.info(result);
+                            $('#data-container').html(loadItemContent(result));
+                        }
+                });
+            // }
+        });
     </script>
+    <style>
+
+        .notice_main_li_left {
+            width: 680px;
+        }
+        .verti {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .notice_main_li_right {
+            width: 264px;
+            text-align: right;
+            font-size: 14px;
+            color: #999999;
+        }
+        .notice_main_li {
+            position: relative;
+            line-height: 14px;
+            padding: 12px 0 12px 20px;
+            font: 14px/24px Arial, 'Microsoft Yahei',"宋体", sans-serif;
+        }
+        .notice_box h2 {
+            font-size: 24px;
+            color: #333;
+            padding-bottom: 14px;
+        }
+        .notice_main_li::before {
+            content: '';
+            display: block;
+            position: absolute;
+            height: 4px;
+            width: 4px;
+            border-radius: 50%;
+            background: #333;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        #wrapper {
+            width: 900px;
+            margin: 20px auto;
+        }
+
+        .data-container {
+            margin-top: 5px;
+        }
+
+        .data-container ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        .data-container li {
+            margin-bottom: 5px;
+            padding: 5px 10px;
+            background: #eee;
+            color: #666;
+        }
+        .page_box {
+            text-align: center;
+            padding: 30px 0;
+        }
+        .paginationjs .paginationjs-pages li.active>a {
+            height: 30px;
+            line-height: 30px;
+            background: #b90100;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -67,18 +190,6 @@
 <!--头部结束-->
 <!--中部开始-->
 <main th:if="${isFirstPage == 0}">
-    <!--<div class="intro_nav">-->
-    <!--<div class="intro_nav_main">-->
-    <!--<ul class="intro_nav_ul verti">-->
-    <!--<li class="intro_nav_li verti intro_nav_active">-->
-    <!--<a href="javascript:;">官方通知</a>-->
-    <!--</li>-->
-    <!--<li class="intro_nav_li verti">-->
-    <!--<a href="javascript:;">红头文件</a>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
     <div class="main_slide">
         <div class="main_slide_box">
             <!--轮播开始-->
@@ -269,16 +380,29 @@
 <!--menu内容显示-->
 <main th:if="${isFirstPage == 1}">
     <div class="main_slide">
-        <div class="main_slide_box" th:utext="${menuData}">
+        <div class="main_slide_box"  style="font-size: 16px" th:utext="${menuData}">
+        </div>
+
+        <!--官方通知开始-->
+        <div class="notice" id="mainItem">
+
+        </div>
+        <!--官方通知结束-->
+        <div class="page_box" id="pagebox"  >
+
+            <div id="wrapper" style="font-size: 16px">
+            </div>
         </div>
     </div>
 </main>
+
 <!--动态内容显示-->
 <main th:if="${isFirstPage == 2}">
     <div class="main_slide">
         <div class="main_slide_box" style="font-size: 16px" th:utext="${menuContentData}">
         </div>
     </div>
+
 </main>
 <!--中部结束-->
 <!--底部开始-->
@@ -397,159 +521,117 @@
 
     });
 
+</script>
+
+<script th:src="@{/csda_files/bootstrap.min.js}"></script>
+<script th:src="@{/csda_files/public.js.下载}"></script>
+<script>
     $(function () {
-        loadCsdaAd('csda_index');
-        loadMainNews();
-        loadMainNotice();
-        loadRedHead();
+        splitLink($(".intro_nav_li"),"intro_nav_active",$(".notice_erji_box"),"notice_erji_active");
+        $(".intro_nav_li").click(function () {
+            $(this).addClass("intro_nav_active").siblings().removeClass("intro_nav_active");
+            $(".notice_erji_box").eq($(this).index()).addClass("notice_erji_active").siblings(".notice_erji_box").removeClass("notice_erji_active")
+        });
+
+        var totalPages1 = loadMainNotice(1);
+        if(totalPages1 > 1){
+            $("#pageBox1").show();
+            Page({
+                num:totalPages1,					//页码数
+                startnum:1,				//指定页码
+                elem:$('#page1'),		//指定的元素
+                callback:function(n){	//回调函数
+                    loadMainNotice(n);
+                }
+            });
+        }else{
+            $("#pageBox1").hide();
+        }
+
+
+        var totalPages2 = loadRedHead(1);
+        if(totalPages2 > 1){
+            $("#pageBox2").show();
+            Page({
+                num:totalPages2,					//页码数
+                startnum:1,				//指定页码
+                elem:$('#page2'),		//指定的元素
+                callback:function(n){	//回调函数
+                    loadRedHead(n);
+                }
+            });
+        }else{
+            $("#pageBox2").hide();
+        }
+
     });
 
-
-    function loadCsdaAd(position) {
-        // var url = ctx + "/wechartExam/loadCsdaAd.spv?postion="+position;
-        // $.get(url,function(data, status){
-        //     var resultCode = data.resultCode;
-        //     if("success" == resultCode){
-        //         var list = data.resultMessage;
-        //         if(list != null && list.length > 0){
-        //             $("#carousel-example-generic").html("");
-        //             var str = " <ol class='carousel-indicators'> ";
-        //             for(var i = 0;i<list.length; i++){
-        //             	var ad = list[i];
-        //             	if(i == 0){
-        //             		str += " <li data-target=\"#carousel-example-generic\" data-slide-to=\""+i+"\" class='active'></li> ";
-        //             	}else{
-        //             		str += " <li data-target=\"#carousel-example-generic\" data-slide-to=\""+i+"\" ></li> ";
-        //             	}
-        //             }
-        //             str += " </ol> ";
-        //             str += "  <div class=\"carousel-inner\" role=\"listbox\"> ";
-        //             for(var i = 0;i<list.length; i++){
-        //             	var ad = list[i];
-        //
-        //             	if(i == 0){
-        //             		str += " <div class=\"item active\"> ";
-        //             	}else{
-        //             		str += " <div class=\"item\"> ";
-        //             	}
-        //             	if(ad.commonAd.adDetailUrl != null && ad.commonAd.adDetailUrl != ''){
-        //                     str += " <a href=\""+ ad.commonAd.adDetailUrl+"\"> ";
-        //                 }else{
-        //                     str += " <a href=\"committee_dynamics/committee_conews.html?newsId="+ad.commonAd.id+"\"> ";
-        //                 }
-        //             	str += " <img src=\""+ad.commonAd.adThumbnail+"\" alt=\""+ad.commonAd.adName+"\"> ";
-        //             	str += " <article>"+ad.commonAd.adName+"</article> ";
-        //             	str += " </a> ";
-        //             	str += " </div> ";
-        //             }
-        //             str += " </div> ";
-        //             $("#carousel-example-generic").html(str);
-        //             $("#carousel-example-generic").carousel();
-        //         }
-        //     }
-        // });
-    }
-
-    function loadMainNews() {
-        var typeId = $("#mainNews").attr("data-id");
-        var url = ctx + "/wechartOrg/queryPageTypeArticles.spv?rand =" + Math.random();
-        $.post(url, {"typeId": typeId, "pageNo": "0", "pageSize": "6"}, function (data, status) {
+    function loadMainNotice(pageNo){
+        var typeId = '2c91e8f3607d7d2601608b68182f002b';
+        var orgName = $("#orgNameSearch").val();
+        if(pageNo){
+            pageNum = parseInt(pageNo);
+        }else{
+            pageNum = 1;
+        }
+        var totalPages = 0;
+        var url = ctx + "/wechartOrg/queryPageTypeArticlesNoPic.spv?rand ="+Math.random();
+        $.ajaxSettings.async = false;
+        $.post(url,{"typeId":typeId,"pageNo":pageNum,"pageSize":"10"},function(data, status){
             var resultCode = data.resultCode;
-            if ("success" == resultCode) {
+            if("success" == resultCode){
                 var list = data.resultMessage;
-                for (var i = 0; i < list.length; i++) {
+                $("#mainNotice").html("");
+                totalPages = data.values.totalPages;
+                for(var i = 0; i < list.length; i++){
                     var article = list[i];
                     var subStr = "";
-                    var thumbnailList = article.thumbnailList;
-                    var thumbnail = "";
-                    if (thumbnailList.length > 0) {
-                        thumbnail = thumbnailList[0].thumbnail;
-                    }
-                    subStr += "<div class=\"news_item verti\"> ";
-                    subStr += "    <div class=\"item_box\"> ";
-                    subStr += "        <div class=\"item_left verti\"> ";
-                    subStr += "            <img class=\"transl_Y\" src=\"" + thumbnail + "\" alt=\"\"> ";
-                    subStr += "        </div> ";
-                    subStr += "        <div class=\"item_right verti\"> ";
-                    subStr += "            <p class=\"item_title\"> ";
-                    subStr += "                <a class=\"item_title_a\" href=\"committee_dynamics/committee_article.html?articleId=" + article.id + "\">" + article.title + "</a> ";
-                    subStr += "            </p> ";
-                    subStr += "            <p class=\"item_text\"> ";
-                    if (article.subTitle == null || article.subTitle == "") {
-                        subStr += "                <span class=\"item_text_span\"> </span> ";
-                    } else {
-                        subStr += "                <span class=\"item_text_span\"> " + article.subTitle + "</span> ";
-                    }
-
-                    subStr += "            </p> ";
-                    subStr += "            <div class=\"item_btm\"> ";
-                    var date = new Date(article.pubTime);
-                    subStr += "                <div class=\"item_time verti\"> " + dateFtt("yyyy-MM-dd", date) + " </div> ";
-                    subStr += "                <div class=\"item_writer verti\"> " + article.author + " </div> ";
-                    subStr += "            </div> ";
-                    subStr += "         </div> ";
+                    subStr += "<li class=\"notice_main_li\"> ";
+                    subStr += "    <div class=\"notice_main_li_left verti\"> ";
+                    subStr += "        <a href=\"notice_article.html?type=mainNotice&articleId="+article.id+"\">" + article.title + "</a> ";
                     subStr += "    </div> ";
-                    subStr += " </div> ";
-                    $("#mainNews").append(subStr);
-                }
-            }
-        });
-    }
-
-    function loadMainNotice() {
-        var typeId = $("#mainNotice").attr("data-id");
-        var url = ctx + "/wechartOrg/queryPageTypeArticles.spv?rand =" + Math.random();
-        $.post(url, {"typeId": typeId, "pageNo": "0", "pageSize": "7"}, function (data, status) {
-            var resultCode = data.resultCode;
-            if ("success" == resultCode) {
-                var list = data.resultMessage;
-                for (var i = 0; i < list.length; i++) {
-                    var article = list[i];
-                    var subStr = "";
-                    var thumbnailList = article.thumbnailList;
-                    var thumbnail = "";
-                    if (thumbnailList.length > 0) {
-                        thumbnail = thumbnailList[0].thumbnail;
-                    }
-                    if (i == 0) {
-                        $("#mainNoticeIcon").attr("src", thumbnail);
-                        $("#mainNoticeUrl").attr("href", "notice/notice_article.html?type=mainNotice&articleId=" + article.id);
-                        $("#mainNoticeTitle").html(article.title);
-                    }
-                    subStr += "<li class=\"notice_right_li\"> ";
-                    subStr += "    <a href=\"notice/notice_article.html?type=mainNotice&articleId=" + article.id + "\"> ";
-                    subStr += "       <span class=\"notice_title verti\">" + article.title + "</span> ";
                     var date = new Date(article.pubTime);
-                    subStr += "        <span class=\"notice_time verti\">" + dateFtt("yyyy-MM-dd", date) + "</span> ";
-                    subStr += "    </a> ";
-                    subStr += " </li> ";
+                    subStr += "    <div class=\"notice_main_li_right verti\">" + dateFtt("yyyy-MM-dd", date) + "</div> ";
+                    subStr += "</li> ";
                     $("#mainNotice").append(subStr);
                 }
             }
         });
+        return totalPages;
     }
 
-    function loadRedHead() {
-        var typeId = $("#redHead").attr("data-id");
-        var url = ctx + "/wechartOrg/queryPageTypeArticles.spv?rand =" + Math.random();
-        $.post(url, {"typeId": typeId, "pageNo": "0", "pageSize": "10"}, function (data, status) {
+    function loadRedHead(pageNo){
+        var typeId= '2c91e8f3608b85c501608b8651910000';
+        var orgName = $("#orgNameSearch").val();
+        if(pageNo){
+            pageNum = parseInt(pageNo);
+        }else{
+            pageNum = 1;
+        }
+        var totalPages = 0;
+        var url = ctx + "/wechartOrg/queryPageTypeArticlesNoPic.spv?rand ="+Math.random();
+        $.ajaxSettings.async = false;
+        $.post(url,{"typeId":typeId,"pageNo":pageNum,"pageSize":"10"},function(data, status){
             var resultCode = data.resultCode;
-            if ("success" == resultCode) {
+            if("success" == resultCode){
                 var list = data.resultMessage;
-                for (var i = 0; i < list.length; i++) {
+                $("#redHead").html("");
+                totalPages = data.values.totalPages;
+                for(var i = 0; i < list.length; i++){
                     var article = list[i];
                     var subStr = "";
-                    subStr += "<li class=\"files_main_li verti\"> ";
-                    subStr += "     <a href=\"notice/notice_article.html?type=redHead&articleId=" + article.id + "\"> ";
-                    subStr += "         <span class=\"notice_title verti\">" + article.title + "</span> ";
+                    subStr += "<li class=\"notice_main_li\"> ";
+                    subStr += "    <div class=\"notice_main_li_left verti\"> ";
+                    subStr += "        <a href=\"notice_article.html?type=redHead&articleId="+article.id+"\">" + article.title + "</a> ";
+                    subStr += "    </div> ";
                     var date = new Date(article.pubTime);
-                    subStr += "         <span class=\"notice_time verti\">" + dateFtt("yyyy-MM-dd", date) + "</span> ";
-                    subStr += "     </a> ";
-                    subStr += " </li> ";
+                    subStr += "    <div class=\"notice_main_li_right verti\">" + dateFtt("yyyy-MM-dd", date) + "</div> ";
+                    subStr += "</li> ";
                     $("#redHead").append(subStr);
                 }
             }
         });
+        return totalPages;
     }
 </script>
 <div style="display: none">

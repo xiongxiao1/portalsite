@@ -41,6 +41,14 @@
         where id = #{id}
     </select>
 
+    <select id="getItemContentPageContent" resultType="long">
+        select count(ic.id) from m_itemContent ic
+        where 1=1
+        <if test="itemId != null">
+            and itemId = #{itemId}
+        </if>
+    </select>
+
     <select id="getItemContentPage" resultMap="ItemContentResult">
         select ic.*,a.id a_id,a.servername a_servername from m_itemContent ic
         left join m_att a on a.ownId = ic.id

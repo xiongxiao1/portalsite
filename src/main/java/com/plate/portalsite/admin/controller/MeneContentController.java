@@ -28,6 +28,12 @@ public class MeneContentController {
     @Autowired
     private MenuContentService contentService;
 
+    @RequestMapping("getItemContentPage")
+    public Map<String,Object>getItemContentPage(int pageSize,int pageNumber,String itemId){
+
+        return contentService.getItemContentPageData(itemId, pageNumber, pageSize);
+    }
+
     @RequestMapping("/getItemContentList")
     public List<Map<String,Object>> getItemContentList(String itemTypeId, String title, String dateStart, String dateEnd, int pageSize, int pageNum){
 
