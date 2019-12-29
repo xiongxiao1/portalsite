@@ -42,11 +42,12 @@
 </form>
 
 <!-- 实例化编辑器 -->
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+    var ctxPath=[[${#httpServletRequest.getContextPath()}]];
 	$('#itemContent_type').combobox({
 		valueField: 'id',
 		textField: 'title',
-		url:'http://localhost:8080/getContentType'
+		url:ctxPath+"/getContentType"
 	});
 	var ue = UE.getEditor('container');
 	function postData( pubFlag) {
@@ -55,7 +56,7 @@
 		}
 	    $("#itemContent").form("submit",{
 			type: 'post',
-			url: 'http://localhost:8080/saveMenuContent',
+			url: ctxPath+"/saveMenuContent",
 			onSubmit: function (param) {
 				console.info("123");
 			},

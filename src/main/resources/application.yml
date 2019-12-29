@@ -15,7 +15,8 @@ spring:
    cache:
 server:
   port: 8080
-  name: /demo
+  servlet:
+    context-path: /entime_grade
 spring.thymeleaf.prefix.classpath: /templates/
 spring.thymeleaf.suffix: .html
 spring.thymeleaf.servlet.content-type: text/html

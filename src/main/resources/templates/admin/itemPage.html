@@ -19,11 +19,12 @@
 </head>
 <body>
 <script type="application/javascript" th:inline="javascript">
+    var ctxPath=[[${#httpServletRequest.getContextPath()}]];
     $(document).ready(function(){
         //获取rootId子节点数据
-        $.get("http://localhost:8080/getTabInfo?type=item", function(data){
+        $.get(ctxPath+"/getTabInfo?type=item", function(data){
 
-            $.get("http://localhost:8080/getTreeList?parentId="+[[${rootId}]], function(list){
+            $.get(ctxPath+"/getTreeList?parentId="+[[${rootId}]], function(list){
                 //初始化表格
                 $('#dg').datagrid({
                     data: list,
@@ -80,11 +81,11 @@
 
         $.ajax({
             type: "post",
-            url: "http://localhost:8080/saveOrUpdateMenuItem",
+            url: ctxPath+"/saveOrUpdateMenuItem",
             data: $("#itemForm").serialize(),
             success: function(msg){
                 //刷新table
-                $('#dg').datagrid('reload',"http://localhost:8080/getTreeList?parentId="+[[${rootId}]]);
+                $('#dg').datagrid('reload',ctxPath+"/getTreeList?parentId="+[[${rootId}]]);
 
                 parent.$("#itemtree").tree('reload');
             }

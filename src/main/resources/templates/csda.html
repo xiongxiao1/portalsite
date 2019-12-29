@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0044)http://www.csda.cn.com/csda/webPC/index.html -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
@@ -11,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
     <meta http-equiv="X-UA-Compatible" content="IE=9">
     <title>CSDA全国街舞执行委员会官方网站</title>
-    <link href="http://www.csda.cn.com/csda/webPC/favicon.ico" rel="shortcut icon">
+    <link href="#/favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="./csda_files/bootstrap.min.css}" th:href="@{/csda_files/bootstrap.min.css}">
     <link rel="stylesheet" href="./csda_files/public.css}" th:href="@{/csda_files/public.css}">
     <link rel="stylesheet" href="./csda_files/index.css}" th:href="@{/csda_files/index.css}">
@@ -26,6 +25,7 @@
     <script th:src="@{/csda_files/global.js}"></script>
     <script th:src="@{/js/pagination.js}"></script>
     <script type="text/javascript" th:inline="javascript">
+        var ctxPath=[[${#httpServletRequest.getContextPath()}]];
         function managementLogin() {
             var domainCtx = getDomainCtx();
             window.open(domainCtx + "/pc-web/management/login.jsp");
@@ -44,7 +44,7 @@
             for(var i=0;i<itemContents.length;i++){
                 strHtml += "<li class=\"notice_main_li\" >\n" ;
                 strHtml += " <div class=\"notice_main_li_left verti\">\n" ;
-                strHtml += " &middot;<a href=\"http://localhost:8080/index/"+[[${currItem.id}]]+"?itemcontentId="+itemContents[i].id+"\">"+itemContents[i].title+"</a>\n" ;
+                strHtml += " &middot;<a href=\""+ctxPath+"/index/"+[[${currItem.id}]]+"?itemcontentId="+itemContents[i].id+"\">"+itemContents[i].title+"</a>\n" ;
                 strHtml += "</div>\n" ;
                 strHtml += "<div class=\"notice_main_li_right verti\">\n" ;
                 strHtml += "2019-12-13\n" ;
@@ -59,9 +59,10 @@
             $('#mainItem').html(strHtml);
         }
         $(document).ready(function() {
+
             // if([[${isFirstPage}]]==1){
                 $('#wrapper').pagination({
-                        dataSource: "http://localhost:8080/getItemContentPage?itemId="+[[${currItem.id}]], //请求的url
+                        dataSource: ctxPath+"/getItemContentPage?itemId="+[[${currItem.id}]], //请求的url
                         locator: 'result.itemContents', //返回值data的位置
                         totalNumberLocator: function (res) { //返回值总数量的位置
                             return Math.floor(res.totalCount);
@@ -75,11 +76,11 @@
                         showGoInput: false,
                         showGoButton: false,
                         callback: function (result, pagination) {   //回掉函数
-                            console.info(result);
                             $('#data-container').html(loadItemContent(result));
                         }
                 });
             // }
+            console.info(ctxPath);
         });
     </script>
     <style>
@@ -175,12 +176,12 @@
         <ul class="nav_ul">
             <li class="nav_li" th:each="item:${allItem[0].children}">
                 <a class="nav_active nav_li_a" th:text="${item.title}" th:id="${item.id}"
-                   th:href="'http://localhost:8080/index/'+${item.id}"></a>
+                   th:href="@{'/index/'+${item.id}}"></a>
 
                 <ul th:if="${item.children.size() != 0}">
                     <li th:each="item2:${item.children}">
                         <a th:text="${item2.title}" th:id="${item2.id}"
-                           th:href="'http://localhost:8080/index/'+${item2.id}"></a></li>
+                           th:href="@{'/index/'+${item2.id}}"></a></li>
                 </ul>
             </li>
         </ul>
@@ -286,7 +287,7 @@
             <p class="mid_english" th:text="${result.wyhdt.enTitle}">RECENT NEWS</p>
             <p class="more_p">
                 <!--最新动态ID写死 2c91e8f3607d7d2601608b68182f002b-->
-                <a class="more_a" th:href="'http://localhost:8080/index/'+${result.wyhdt.id}">更多 &gt;&gt;</a>
+                <a class="more_a" th:href="@{'/index/'+${result.wyhdt.id}}">更多 &gt;&gt;</a>
             </p>
 
             <div class="main_news_box" id="mainNews" data-id="2c91e8f3608b85c501608b870e320001">
@@ -300,7 +301,7 @@
                         <div class="item_right verti">
                             <p class="item_title">
                                 <a class="item_title_a"
-                                   th:href="'http://localhost:8080/index/'+${result.wyhdt.id}+'?itemcontentId='+${wyhdtItem.id}"
+                                   th:href="@{'/index/'+${result.wyhdt.id}+'?itemcontentId='+${wyhdtItem.id}}"
                                    th:text="${wyhdtItem.title}">伦敦奥运会体操冠军—来自云南的郭伟阳—预祝第三届中街联赛云南站暨云南省第一届街舞U系列锦标赛圆满成功！</a>
                             </p>
                             <p class="item_text">
@@ -323,7 +324,7 @@
             <p class="mid_title" th:text="${result.notice.title}">官方通知</p>
             <p class="mid_english" th:text="${result.notice.enTitle}">OFFICIAL NOTICE</p>
             <p class="more_p">
-                <a class="more_a" th:href="'http://localhost:8080/index/'+${result.notice.id}">更多 &gt;&gt;</a>
+                <a class="more_a" th:href="@{'/index/'+${result.notice.id}}">更多 &gt;&gt;</a>
             </p>
             <div class="main_notice_box">
                 <div class="notice_left verti">
@@ -337,7 +338,7 @@
                 <div class="notice_right verti">
                     <ul class="notice_right_ul" id="mainNotice" data-id="2c91e8f3607d7d2601608b68182f002b">
                         <li class="notice_right_li" th:each="noticeItem:${result.notices}">
-                            <a th:href="'http://localhost:8080/index/'+${result.notice.id}+'?itemcontentId='+${noticeItem.id}">
+                            <a th:href="@{'/index/'+${result.notice.id}+'?itemcontentId='+${noticeItem.id}}">
                                 <span class="notice_title verti"
                                       th:text="${noticeItem.title}">黑舞室街舞文化传播有限公司成为CSDA会员单位！</span>
                                 <span class="notice_time verti" th:text="${noticeItem.createdate}">>2019-11-15</span>
@@ -355,7 +356,7 @@
             <p class="mid_title" th:text="${result.htwj.title}">红头文件</p>
             <p class="mid_english" th:text="${result.htwj.enTitle}">RED-HEAD DOCUMENT</p>
             <p class="more_p">
-                <a class="more_a" th:href="'http://localhost:8080/index/'+${result.htwj.id}">更多 &gt;&gt;</a>
+                <a class="more_a" th:href="@{'/index/'+${result.htwj.id}}">更多 &gt;&gt;</a>
             </p>
             <!--红头文件开始-->
             <div class="red_head_files">
@@ -363,7 +364,7 @@
                     <ul class="files_main_ul" id="redHead" data-id="2c91e8f3608b85c501608b8651910000">
 
                         <li class="files_main_li verti" th:each="htwjItem:${result.htwjs}">
-                            <a th:href="'http://localhost:8080/index/'+${result.htwj.id}+'?itemcontentId='+${htwjItem.id}">
+                            <a th:href="@{'/index/'+${result.htwj.id}+'?itemcontentId='+${htwjItem.id}}">
                                 <span class="notice_title verti"
                                       th:text="${htwjItem.title}">>关于成立CSDA台湾事业发展部的授权通知</span>
                                 <span class="notice_time verti" th:text="${htwjItem.createdate}">>2018-08-08</span>
@@ -498,7 +499,6 @@
 </div>
 <!--客服结束-->
 <!-- <script src="public/js/bootstrap.min.js"></script> -->
-<script th:src="@{/csda_files/public.js.下载}"></script>
 <script>
     $(".item_box").click(function () {
         window.location.href = 'committee_dynamics/committee_article.html';
@@ -525,119 +525,10 @@
 
 <script th:src="@{/csda_files/bootstrap.min.js}"></script>
 <script th:src="@{/csda_files/public.js.下载}"></script>
-<script>
-    $(function () {
-        splitLink($(".intro_nav_li"),"intro_nav_active",$(".notice_erji_box"),"notice_erji_active");
-        $(".intro_nav_li").click(function () {
-            $(this).addClass("intro_nav_active").siblings().removeClass("intro_nav_active");
-            $(".notice_erji_box").eq($(this).index()).addClass("notice_erji_active").siblings(".notice_erji_box").removeClass("notice_erji_active")
-        });
-
-        var totalPages1 = loadMainNotice(1);
-        if(totalPages1 > 1){
-            $("#pageBox1").show();
-            Page({
-                num:totalPages1,					//页码数
-                startnum:1,				//指定页码
-                elem:$('#page1'),		//指定的元素
-                callback:function(n){	//回调函数
-                    loadMainNotice(n);
-                }
-            });
-        }else{
-            $("#pageBox1").hide();
-        }
-
-
-        var totalPages2 = loadRedHead(1);
-        if(totalPages2 > 1){
-            $("#pageBox2").show();
-            Page({
-                num:totalPages2,					//页码数
-                startnum:1,				//指定页码
-                elem:$('#page2'),		//指定的元素
-                callback:function(n){	//回调函数
-                    loadRedHead(n);
-                }
-            });
-        }else{
-            $("#pageBox2").hide();
-        }
-
-    });
-
-    function loadMainNotice(pageNo){
-        var typeId = '2c91e8f3607d7d2601608b68182f002b';
-        var orgName = $("#orgNameSearch").val();
-        if(pageNo){
-            pageNum = parseInt(pageNo);
-        }else{
-            pageNum = 1;
-        }
-        var totalPages = 0;
-        var url = ctx + "/wechartOrg/queryPageTypeArticlesNoPic.spv?rand ="+Math.random();
-        $.ajaxSettings.async = false;
-        $.post(url,{"typeId":typeId,"pageNo":pageNum,"pageSize":"10"},function(data, status){
-            var resultCode = data.resultCode;
-            if("success" == resultCode){
-                var list = data.resultMessage;
-                $("#mainNotice").html("");
-                totalPages = data.values.totalPages;
-                for(var i = 0; i < list.length; i++){
-                    var article = list[i];
-                    var subStr = "";
-                    subStr += "<li class=\"notice_main_li\"> ";
-                    subStr += "    <div class=\"notice_main_li_left verti\"> ";
-                    subStr += "        <a href=\"notice_article.html?type=mainNotice&articleId="+article.id+"\">" + article.title + "</a> ";
-                    subStr += "    </div> ";
-                    var date = new Date(article.pubTime);
-                    subStr += "    <div class=\"notice_main_li_right verti\">" + dateFtt("yyyy-MM-dd", date) + "</div> ";
-                    subStr += "</li> ";
-                    $("#mainNotice").append(subStr);
-                }
-            }
-        });
-        return totalPages;
-    }
-
-    function loadRedHead(pageNo){
-        var typeId= '2c91e8f3608b85c501608b8651910000';
-        var orgName = $("#orgNameSearch").val();
-        if(pageNo){
-            pageNum = parseInt(pageNo);
-        }else{
-            pageNum = 1;
-        }
-        var totalPages = 0;
-        var url = ctx + "/wechartOrg/queryPageTypeArticlesNoPic.spv?rand ="+Math.random();
-        $.ajaxSettings.async = false;
-        $.post(url,{"typeId":typeId,"pageNo":pageNum,"pageSize":"10"},function(data, status){
-            var resultCode = data.resultCode;
-            if("success" == resultCode){
-                var list = data.resultMessage;
-                $("#redHead").html("");
-                totalPages = data.values.totalPages;
-                for(var i = 0; i < list.length; i++){
-                    var article = list[i];
-                    var subStr = "";
-                    subStr += "<li class=\"notice_main_li\"> ";
-                    subStr += "    <div class=\"notice_main_li_left verti\"> ";
-                    subStr += "        <a href=\"notice_article.html?type=redHead&articleId="+article.id+"\">" + article.title + "</a> ";
-                    subStr += "    </div> ";
-                    var date = new Date(article.pubTime);
-                    subStr += "    <div class=\"notice_main_li_right verti\">" + dateFtt("yyyy-MM-dd", date) + "</div> ";
-                    subStr += "</li> ";
-                    $("#redHead").append(subStr);
-                }
-            }
-        });
-        return totalPages;
-    }
-</script>
 <div style="display: none">
     <script th:src="@{/csda_files/z_stat.php}" language="JavaScript"></script>
     <script th:src="@{/csda_files/core.php}" charset="utf-8" type="text/javascript"></script>
-    <a href="https://www.cnzz.com/stat/website.php?web_id=1273328440" target="_blank" title="站长统计">站长统计</a>
+    <a href="#" target="_blank" title="站长统计">站长统计</a>
 </div>
 
 </body>

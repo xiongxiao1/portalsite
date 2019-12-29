@@ -13,12 +13,11 @@
 	<script type="text/javascript" th:src="@{/js/easyui/plugins/jquery.combotree.js}"></script>
 	<script type="text/javascript" th:src="@{/js/easyui/plugins/jquery.tabs.js}"></script>
 	<script type="text/javascript" th:src="@{/js/easyui/plugins/jquery.datagrid.js}"></script>
-	<script type="text/javascript">
-		/*function showcontent(language){
-			$('#content').html('Introduction to ' + language + ' language');
-		}*/
+	<script type="text/javascript" th:inline="javascript">
+
+        var ctxPath=[[${#httpServletRequest.getContextPath()}]];
         $(document).ready(function(){
-			alert('java');
+			//alert('java');
 		});
 	</script>
 </head>
@@ -54,12 +53,12 @@
     $(document).ready(function(){
         //初始化树节点
         $('#itemtree').tree({
-            url:'http://localhost:8080/getAllItem',
+            url:ctxPath+'/getAllItem',
             formatter:function(node){
                 return node.title;
             },
             onClick: function(node){
-				var url =  "http://localhost:8080/itemPag"+"?rootId="+node.id;
+				var url =  ctxPath+"/itemPag"+"?rootId="+node.id;
                 opentab(node,tablesItem[0],url);
             }
         });
@@ -67,13 +66,13 @@
  	var createNewsContent = function(){
 
  		var node = {id:"123123",title:"新建消息"}
-		var url =  "http://localhost:8080/itemEditor";
+		var url =  ctxPath+"/itemEditor";
 		opentab(node,tablesItem[1],url);
 	}
 
 	var manageNewsContent = function(){
  		var node = {id:"123124",title:"消息管理"}
- 		var url = "http://localhost:8080/contentList";
+ 		var url = ctxPath+"/contentList";
 		opentab(node,tablesItem[2],url);
 	}
     //根据根节点打开右侧内容窗口
