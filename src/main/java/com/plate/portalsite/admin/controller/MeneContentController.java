@@ -28,9 +28,28 @@ public class MeneContentController {
     @Autowired
     private MenuContentService contentService;
 
-    @RequestMapping("getItemContentPage")
-    public Map<String,Object>getItemContentPage(int pageSize,int pageNumber,String itemId){
+    /**
+     * 发布
+     * @param id
+     */
+    @RequestMapping("/publishMenuContent")
+    public void publishMenuContent(String id,String pubFlag){
+        contentService.publishMenuContent(id);
+    }
 
+    @RequestMapping("deleteItemContent")
+    public void deleteItemContent(String itemContentId){
+         contentService.deleteItemContent(itemContentId);
+    }
+    @RequestMapping("getItemContentPage")
+    public Map<String,Object>getItemContentPage(Integer pageSize,Integer pageNumber,String itemId,Integer page,Integer rows){
+
+        if (page != null && page != 0){
+            pageNumber = page;
+        }
+        if(rows != null &&   rows != 0){
+            pageSize = rows;
+        }
         return contentService.getItemContentPageData(itemId, pageNumber, pageSize);
     }
 

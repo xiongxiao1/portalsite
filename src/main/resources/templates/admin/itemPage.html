@@ -20,15 +20,38 @@
 <body>
 <script type="application/javascript" th:inline="javascript">
     var ctxPath=[[${#httpServletRequest.getContextPath()}]];
+    var rootId = [[${rootId}]];
+</script>
+<script type="application/javascript" th:inline="none">
     $(document).ready(function(){
         //获取rootId子节点数据
         $.get(ctxPath+"/getTabInfo?type=item", function(data){
 
-            $.get(ctxPath+"/getTreeList?parentId="+[[${rootId}]], function(list){
+            $.get(ctxPath+"/getTreeList?parentId="+rootId, function(list){
                 //初始化表格
                 $('#dg').datagrid({
                     data: list,
-                    columns:[data.tableCols],
+                    columns:[[
+                        {field:"id",title:"id",width:100,hidden:true},
+                        {field:"num",title:"序号",width:100},
+                        {field:"data",title:"内容",width:100,hidden:true},
+                        {field:"title",title:"标题",width:300},
+                        {field:"code",title:"编码",width:100},
+                        {field:"enTitle",title:"英文标题",width:100},
+                        {field:"kind",title:"类型",width:100,
+                            formatter: function(value,row,index){
+                                if (row.kind == 0){
+                                    return "首页导航栏";
+                                } else if(row.kind == 2) {
+                                    return "内容导航栏";
+                                } else if(row.kind == 3) {
+                                    return "消息型导航栏";
+                                }else {
+                                    return "其他";
+                                }
+                            }},
+                        {field:"description",title:"描述",width:100}
+                    ]],
                     singleSelect:true,
                     onClickRow:function(rowIndex,rowData){
 
@@ -53,18 +76,18 @@
             });
 
             //初始化表单
-            var str = "";
-            for(var i=0;i<data.formCols.length;i++){
-                if(data.formCols[i].hidden){
-                    str += "<input id=\"" + "formItem_"+data.formCols[i].field +"\" name=\""+ data.formCols[i].field +"\" hidden=true style=\"width:300px\" class='formItem'>";
-                }else {
-                    str += "<tr>\n" +
-                        "        <td>"+data.formCols[i].title+"</td>\n" +
-                        "        <td><input id=\"" + "formItem_"+data.formCols[i].field +"\" name=\""+ data.formCols[i].field +"\"  style=\"width:300px\" class='formItem'></td>\n" +
-                        "    </tr>";
-                }
-            }
-            $('#formTab').html(str);
+            // var str = "";
+            // for(var i=0;i<data.formCols.length;i++){
+            //     if(data.formCols[i].hidden){
+            //         str += "<input id=\"" + "formItem_"+data.formCols[i].field +"\" name=\""+ data.formCols[i].field +"\" hidden=true style=\"width:300px\" class='formItem'>";
+            //     }else {
+            //         str += "<tr>\n" +
+            //             "        <td>"+data.formCols[i].title+"</td>\n" +
+            //             "        <td><input id=\"" + "formItem_"+data.formCols[i].field +"\" name=\""+ data.formCols[i].field +"\"  style=\"width:300px\" class='formItem'></td>\n" +
+            //             "    </tr>";
+            //     }
+            // }
+            //$('#formTab').html(str);
 
         });
         //初始化标签
@@ -85,7 +108,7 @@
             data: $("#itemForm").serialize(),
             success: function(msg){
                 //刷新table
-                $('#dg').datagrid('reload',ctxPath+"/getTreeList?parentId="+[[${rootId}]]);
+                $('#dg').datagrid('reload',ctxPath+"/getTreeList?parentId="+rootId);
 
                 parent.$("#itemtree").tree('reload');
             }
@@ -100,10 +123,13 @@
             }
         });
     }
+    function createItem() {
+        $("#itemForm").form("clear");
+    }
 </script>
 <!--功能按钮-->
 <div id="buttonSpan">
-    <a id="btnAdd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add' ">新建</a>
+    <a id="btnAdd" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add' " onclick="createItem()">新建</a>
     <a id="btnUpdate" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-update'" >修改</a>
     <a id="btnSave" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="submitData()">保存</a>
     <a id="btnDelete" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-delete'"  onclick="deleteData()">删除</a>
@@ -118,8 +144,36 @@
 <form id  = "itemForm">
     <input type="hidden" name="parentId" th:value = "${rootId}"/>
     <table style="margin-top: 20px" id = "formTab">
+        <table style="margin-top: 20px" id="formTab">
+            <input id="formItem_id" name="id" hidden="true" style="width:300px" class="formItem">
+            <input id="formItem_data" name="data" hidden="true" style="width:300px" class="formItem">
+            <tbody>
+            <tr>
+            <td>标题</td>
+            <td><input id="formItem_title" name="title" style="width:300px" class="formItem"></td>
+        </tr><tr>
+            <td>编码</td>
+            <td><input id="formItem_code" name="code" style="width:300px" class="formItem"></td>
+        </tr><tr>
+            <td>英文标题</td>
+            <td><input id="formItem_enTitle" name="enTitle" style="width:300px" class="formItem"></td>
+        </tr><tr>
+            <td>描述</td>
+            <td><input id="formItem_description" name="description" style="width:300px" class="formItem"></td>
+        </tr><tr>
+            <td>类型</td>
+            <td>
+                <select id="formItem_kind" name="kind" style="width:300px" class="formItem">
+                    <option value ="0">首页导航栏</option>
+                    <option value ="2">内容导航栏</option>
+                    <option value="3">消息型导航栏</option>
+                </select>
+            </td>
+        </tr>
+            </tbody>
+        </table>
     </table>
-    <textarea id="containerItem" name="data" type="text/plain">这里写你的初始化内容</textarea>
+    <textarea id="containerItem" name="data" type="text/plain"></textarea>
 </form>
 </body>
 </html>

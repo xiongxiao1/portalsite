@@ -21,6 +21,10 @@
         <result property="data" column="data"/>
     </resultMap>
 
+    <select id="getItemByCode" resultMap="MenuItemResult">
+        select * from m_item
+        where code=#{code}
+    </select>
     <select id="getAllItem" resultMap="MenuItemResult" parameterType="string">
 
         select * from m_item

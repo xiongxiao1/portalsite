@@ -21,4 +21,6 @@ public interface MenuContentMapper {
     ItemContent getItemContentById(@Param("id") String id);
 
     long getItemContentPageContent(String itemId);
+
+    void deleteById(@Param("id") String id);
 }

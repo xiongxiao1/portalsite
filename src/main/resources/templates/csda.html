@@ -32,6 +32,7 @@
         }
 
         function loadItemContent(itemContents){
+            $("#mainItem").addClass("notice");
             $('#mainItem').html("");
             var strHtml = "";
             if(itemContents.length>0)
@@ -385,8 +386,7 @@
         </div>
 
         <!--官方通知开始-->
-        <div class="notice" id="mainItem">
-
+        <div  id="mainItem">
         </div>
         <!--官方通知结束-->
         <div class="page_box" id="pagebox"  >

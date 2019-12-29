@@ -1,5 +1,10 @@
 package com.plate.portalsite.admin.controller;
 
+import com.plate.portalsite.admin.dao.SysInfoMapper;
+import com.plate.portalsite.common.entity.SysInfo;
+import com.plate.portalsite.common.help.UUIDHelper;
+import com.plate.portalsite.common.util.CommonConst;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +14,38 @@ import java.util.*;
 @RestController
 public class SysInfoController {
 
+    @Autowired
+    private SysInfoMapper sysInfoMapper;
+
+    @RequestMapping("saveOrUpdateSysInfo")
+    public void saveOrUpdateSysInfo(SysInfo sysInfo){
+
+        if(StringUtils.isEmpty(sysInfo.getCanDel()) ){
+            sysInfo.setCanDel(CommonConst.NOT);
+        }
+        if (StringUtils.isEmpty(sysInfo.getId())){
+            sysInfo.setId(UUIDHelper.newUUID());
+            sysInfoMapper.save(sysInfo);
+        }else
+            sysInfoMapper.update(sysInfo);
+    }
+
+    @RequestMapping("getSysInfoPage")
+    public Map<String,Object> saveOrUpdateSysInfo(Integer page,Integer rows){
+        List<SysInfo> sysInfoPage = sysInfoMapper.getSysInfoPage((page - 1) * rows, rows);
+        int total = sysInfoMapper.getPageTotal();
+
+        Map<String,Object>result = new HashMap<>();
+        result.put("rows", sysInfoPage);
+        result.put("total", total);
+        return result;
+    }
+    @RequestMapping("deleteById")
+    public void deleteById(String id){
+        SysInfo sysinfo = sysInfoMapper.getById(id);
+        if(sysinfo != null && sysinfo.getCanDel().equals(CommonConst.NOT))
+            sysInfoMapper.deleteById(id);
+    }
     /**
      * 返回对应列 生成表格和表单
      * @param type

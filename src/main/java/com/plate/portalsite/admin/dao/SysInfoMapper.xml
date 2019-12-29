@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plate.portalsite.admin.dao.SysInfoMapper">
+    <resultMap type="com.plate.portalsite.common.entity.SysInfo" id="SysInfoResult">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="syscode" column="syscode"/>
+        <result property="sysvalue" column="sysvalue"/>
+        <result property="description" column="description"/>
+        <result property="canDel" column="canDel"/>
+    </resultMap>
+
+    <select id="getByCode" resultMap="SysInfoResult">
+        select * from m_sysinfo
+        where syscode =#{syscode}
+    </select>
+
+    <select id="getById" resultMap="SysInfoResult">
+        select * from m_sysinfo
+        where id =#{id}
+    </select>
+
+    <select id="getSysInfoPage" resultMap="SysInfoResult">
+        select * from m_sysinfo
+        order by syscode
+        limit ${startIndex},${pageSize}
+
+    </select>
+
+    <select id="getPageTotal" resultType="int">
+        select COUNT(ID) from m_sysinfo
+    </select>
+
+    <update id="update" parameterType="com.plate.portalsite.common.entity.SysInfo">
+
+        update m_sysinfo
+        <set>
+            <if test="name != null">
+                name= #{name},
+            </if>
+            <if test="syscode != null">
+                syscode= #{syscode},
+            </if>
+            <if test="sysvalue != null">
+                sysvalue= #{sysvalue},
+            </if>
+            <if test="description != null">
+                description= #{description},
+            </if>
+            <if test="canDel != null">
+                canDel= #{canDel},
+            </if>
+        </set>
+        where id= #{id}
+    </update>
+
+    <insert id="save" parameterType="com.plate.portalsite.common.entity.SysInfo">
+
+
+        insert into m_sysinfo(
+            id,
+            name,
+            syscode,
+            sysvalue,
+            description,
+            canDel
+        )
+        values(
+            #{id},
+            #{name},
+            #{syscode},
+            #{sysvalue},
+            #{description},
+            #{canDel}
+        )
+    </insert>
+
+    <delete id="deleteById">
+
+        delete from m_sysinfo
+        where id = #{id}
+    </delete>
+</mapper>

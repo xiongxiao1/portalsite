@@ -129,4 +129,8 @@ public class MenuService {
     public MenuItem getItemById(String id) {
         return menuItemMapper.getItemById(id);
     }
+
+    public MenuItem getItemByCode(String code) {
+        return menuItemMapper.getItemByCode(code);
+    }
 }

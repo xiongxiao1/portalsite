@@ -1,5 +1,6 @@
 package com.plate.portalsite.page.controller;
 
+import com.plate.portalsite.admin.dao.SysInfoMapper;
 import com.plate.portalsite.admin.service.MenuContentService;
 import com.plate.portalsite.admin.service.MenuService;
 import com.plate.portalsite.common.entity.ItemContent;
@@ -25,9 +26,10 @@ public class LoginController {
 
     @Autowired
     private MenuService menuService;
-
     @Autowired
     private MenuContentService menuContentService;
+    @Autowired
+    private SysInfoMapper sysInfoMapper;
     @RequestMapping("/login")
     public String login() {
 
@@ -35,6 +37,11 @@ public class LoginController {
         return "admin/index";
     }
 
+    @RequestMapping("sysInfoList")
+    public String sysInfoList(){
+
+        return "admin/sysInfoList";
+    }
     @RequestMapping("/itemPag")
     public String itemPag(String rootId, Model model) {
 
@@ -49,6 +56,18 @@ public class LoginController {
     @RequestMapping("/contentList")
     public String contentList(Model model){
         return "admin/contentList";
+    }
+
+    String getDefaultItemValue(String key){
+        try{
+            return sysInfoMapper.getByCode(key).getSysvalue();
+        }catch (Exception e){
+            System.out.printf("******没有设置系统变量*****"+key);
+            System.out.printf("******没有设置系统变量*****"+key);
+            System.out.printf("******没有设置系统变量*****"+key);
+            e.printStackTrace();
+        }
+        return "";
     }
     @RequestMapping(value ={"/index/{id}","/index"} )
     public String csdaPage(HttpServletRequest request, @PathVariable(value="id",required=false) String id, String itemcontentId){
@@ -66,7 +85,7 @@ public class LoginController {
             if (!"01".equals(item.getCode()))
                 isFirstPage = 1;
         }else{
-            item = menuService.getItemById("b38d68e2e28a46a38b0f2675f93f0b43");
+            item = menuService.getItemByCode(getDefaultItemValue("mrdhl"));
         }
 
         //做详情页处理
@@ -79,19 +98,19 @@ public class LoginController {
         if(isFirstPage == 0){ //首页
 
             //获取最新动态6 官方通知 7个，红头文件 10个，
-            MenuItem wyhdt = menuService.getItemById("fe833d68e4e4451b982bdced661dcb0f");//官方通知
+            MenuItem wyhdt = menuService.getItemByCode(getDefaultItemValue("sydhl1"));//官方通知
 
             List<ItemContent> wyhdts =menuContentService.getItemContentPage(wyhdt.getId(),pageNum,pageSize);
             result.put("wyhdts",wyhdts);
             result.put("wyhdt",wyhdt);
 
             pageSize = 7;
-            MenuItem notice = menuService.getItemById("bd12ad9f3474426a93bba31154eb3694");//官方通知
+            MenuItem notice = menuService.getItemByCode(getDefaultItemValue("sydhl2"));//官方通知
             List<ItemContent> notices =menuContentService.getItemContentPage(notice.getId(),pageNum,pageSize);
             result.put("notices",notices);
             result.put("notice",notice);
 
-            MenuItem htwj = menuService.getItemById("164edeb9b99b4ef5a43fcf07b86d9523");//红头文件
+            MenuItem htwj = menuService.getItemByCode(getDefaultItemValue("sydhl3"));//红头文件
             pageSize = 10;
             List<ItemContent> htwjs =menuContentService.getItemContentPage(notice.getId(),pageNum,pageSize);
             result.put("htwjs",htwjs);

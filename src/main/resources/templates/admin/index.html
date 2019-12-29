@@ -33,8 +33,9 @@
 					<ul id="itemtree"></ul>
 				</div>
 				<div title="消息动态管理"  data-options="selected:true" style="padding:10px;">
-					<ul><a href="javascript:void(0)" onclick="createNewsContent()">消息新建</a></ul>
+					<!--<ul><a href="javascript:void(0)" onclick="createNewsContent()">消息新建</a></ul>-->
 					<ul><a href="javascript:void(0)" onclick="manageNewsContent()">消息管理</a></ul>
+					<ul><a href="javascript:void(0)" onclick="manageSysContent()">系统变量设置</a></ul>
 				</div>
 			</div>
 		<!--</div>-->
@@ -70,11 +71,19 @@
 		opentab(node,tablesItem[1],url);
 	}
 
+			/**
+			 * 消息管理页面
+			 */
 	var manageNewsContent = function(){
- 		var node = {id:"123124",title:"消息管理"}
+ 		var node = {id:"123124",title:"消息管理"};
  		var url = ctxPath+"/contentList";
 		opentab(node,tablesItem[2],url);
-	}
+	};
+	function   manageSysContent(){
+		var node = {id:"123125",title:"系统信息管理"};
+		var url = ctxPath+"/sysInfoList";
+        opentab(node,tablesItem[2],url);
+    }
     //根据根节点打开右侧内容窗口
     var opentab = function(node,type,url){
 

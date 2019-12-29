@@ -2,6 +2,7 @@ package com.plate.portalsite.admin.dao;
 
 import com.plate.portalsite.common.entity.MenuItem;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface MenuItemMapper {
     List<MenuItem> getItemByType(String kind);
 
     MenuItem getItemById(String id);
+
+    MenuItem getItemByCode(@Param("code") String code);
 }

@@ -8,6 +8,7 @@ import com.plate.portalsite.common.entity.MenuItem;
 import com.plate.portalsite.common.help.DateHelper;
 import com.plate.portalsite.common.help.EvnHelper;
 import com.plate.portalsite.common.help.UUIDHelper;
+import com.plate.portalsite.common.util.CommonConst;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -113,11 +114,49 @@ public class MenuContentService {
         long total  = this.getPageCount(itemId);
         result.put("itemContents",itemContentPage);
         result.put("totalCount",total);
+        result.put("total", total);
+        List<Map<String,Object>>rows = new ArrayList<>();
+        int i=1;
+        for (ItemContent ItemContent :itemContentPage){
+
+            HashMap<String, Object> item = new HashMap<>();
+            item.put("num",i++);
+            item.put("id",ItemContent.getId());
+            item.put("title",ItemContent.getTitle());
+            item.put("data",ItemContent.getData());
+            item.put("kindId",ItemContent.getItemId());
+            item.put("kind",ItemContent.getItemName());
+            item.put("pubFlag",ItemContent.getPubFlag());
+            item.put("pubdate",ItemContent.getPublishdate());
+            rows.add(item);
+        }
+        result.put("rows", rows);
         return result;
     }
 
     private long getPageCount(String itemId) {
 
         return menuContentMapper.getItemContentPageContent(itemId);
+    }
+
+    /**
+     * 删除消息 并删除附件
+     * @param itemContentId
+     */
+    public void deleteItemContent(String itemContentId) {
+        ItemContent itemContent = menuContentMapper.getItemContentById(itemContentId);
+
+        if(itemContent != null){
+
+            menuContentMapper.deleteById(itemContent.getId());
+            attachmentMapper.deleteByOwnId(itemContent.getId());
+        }
+    }
+
+    public void publishMenuContent(String id) {
+        ItemContent itemContentById = menuContentMapper.getItemContentById(id);
+        itemContentById.setPubFlag(CommonConst.YES);
+        itemContentById.setPublishdate(DateHelper.getCurrDateTime());
+        this.saveOrUpdate(itemContentById,null);
     }
 }

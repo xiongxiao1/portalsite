@@ -21,63 +21,54 @@
     var ctxPath=[[${#httpServletRequest.getContextPath()}]];
 </script>
 <script type="application/javascript" th:inline="none">
-    var ue = UE.getEditor('container');
 
     $(document).ready(function(){
-        $('#item_id').combobox({
-            valueField: 'id',
-            textField: 'title',
-            url:ctxPath+"/getContentType"
-        });
+
         $('#dg').datagrid({
-            url:ctxPath+"/getItemContentPage",
+            url:ctxPath+"/getSysInfoPage",
             columns:[[
                 {field:"id",title:"id",width:100,hidden:true},
-                {field:"num",title:"序号",width:100},
-                {field:"kindId",title:"消息类型",width:100,hidden:true},
-                {field:"kind",title:"消息类型",width:100},
-                {field:"title",title:"消息标题",width:300},
-                {field:"data",title:"内容",width:100,hidden:true},
-                {field:"pubFlag",title:"是否发布",width:100,
+                {field:"name",title:"名称",width:300},
+                {field:"syscode",title:"代码",width:100},
+                {field:"sysvalue",title:"内容",width:100},
+                {field:"description",title:"描述",width:400},
+                {field:"canDel",title:"是否可删除",width:100,
                     formatter: function(value,row,index){
-                        if (row.pubFlag == 0){
-                            return "未发布";
+                        if (row.canDel == 0){
+                            return "能";
                         } else {
-                            return "已发布";
+                            return "不能";
                         }
-                    }},
-                {field:"pubdate",title:"发布日期",width:100},
-                {field:"data",title:"内容",width:100,hidden:true}
+                 }}
             ]],
             singleSelect:true,
             pagination:true,
             onSelect:function(rowIndex, rowData){
                 enableForm(true);
-                ue.setContent(rowData.data);
-
-                $("#item_title").textbox("setValue",rowData.title);
-                $('#item_id').combobox('setValue', rowData.kindId);
-                $('#item_contentId').val(rowData.id);
+                $('#sysinfo_id').val(rowData.id);
+                $('#sysinfo_canDel').val(rowData.canDel);
+                $('#sysinfo_name').textbox("setValue",rowData.name);
+                $('#sysinfo_syscode').textbox("setValue",rowData.syscode);
+                $('#sysinfo_sysvalue').textbox("setValue",rowData.sysvalue);
+                $('#sysinfo_description').textbox("setValue",rowData.description);
             }
         });
     });
 
-    function enableForm(flag) {
-        if(flag)//flag 为true 禁用
-            ue.setDisabled('preview');
-        else
-            ue.setEnabled();
-        $("#item_title").textbox({"disabled": flag});
-        $('#item_id').combobox({"disabled": flag});
-    }
     function clearForm() {
-        $("#formItemContent").form("clear");
-        ue.setContent("");
+        $("#formsysInfo").form("clear");
+    }
+    function enableForm(flag) {
+        $('#sysinfo_name').textbox({"disabled": flag});
+        $('#sysinfo_syscode').textbox({"disabled": flag});
+        $('#sysinfo_sysvalue').textbox({"disabled": flag});
+        $('#sysinfo_description').textbox({"disabled": flag});
     }
     /**
      * 删除
      */
     function deleContent() {
+
         var rows = $("#dg").datagrid("getSelections");
         if(rows.length == 0){
             $.messager.alert("请选择要删除的行");
@@ -85,7 +76,7 @@
         }
         $.messager.confirm('Confirm','确定删除选定的数据吗?',function(r){
             if (r){
-                $.post(ctxPath+"/deleteItemContent",{"itemContentId":rows[0].id},function (data) {
+                $.post(ctxPath+"/deleteById",{"id":rows[0].id},function (data) {
                     $("#dg").datagrid("load");
                     clearForm();
                 });
@@ -103,27 +94,6 @@
         clearForm();
     }
     /**
-     * 发布
-     * @param index
-     */
-    function publishContent() {
-
-        if($("#itemContent_pubFlag").val() == null){
-            $("#itemContent_pubFlag").val("0");
-        }
-        var rows = $("#dg").datagrid("getSelections");
-        if(rows.length == 0){
-            $.messager.alert("请选择要发布的数据");
-            return;
-        }
-        $.post(ctxPath+"/publishMenuContent",{"id":rows[0].id},function (data) {
-            $("#dg").datagrid("load");
-            $.messager.alert("successful","已发布");
-            return;
-        });
-    }
-
-    /**
      * 修改
      */
     function editContent() {
@@ -131,9 +101,13 @@
         enableForm(false);
     }
     function submitData() {
-        $("#formItemContent").form("submit",{
+        if($("#sysinfo_canDel").val() == null){
+            $("#sysinfo_canDel").val("0");
+        }
+
+        $("#formsysInfo").form("submit",{
             type: 'post',
-            url: ctxPath+"/saveMenuContent",
+            url: ctxPath+"/saveOrUpdateSysInfo",
             onSubmit: function (param) {
                 console.info("123");
             },
@@ -154,29 +128,30 @@
     <a id="btnUpdate" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-update'" onclick="editContent()" >修改</a>
     <a id="btnSave" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-save'" onclick="submitData()">保存</a>
     <a id="btnDelete" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-delete'"  onclick="deleContent()">删除</a>
-    <a id="btnSearch" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="publishContent()">发布</a>
 </div>
 <table id="dg">
 </table>
-<form action="#" method="post" id="formItemContent" style="margin-top: 15px" enctype="multipart/form-data">
+<form action="#" method="post" id="formsysInfo" style="margin-top: 15px" enctype="multipart/form-data">
     <table>
-        <input id="item_contentId" name="id" type="hidden"></td></td>
-        <input id="itemContent_pubFlag" name="pubFlag" type="hidden"  value="0"/>
+        <input id="sysinfo_id" name="id" type="hidden"></td></td>
+        <input id="sysinfo_canDel" name="canDel" type="hidden"></td></td>
         <tr>
-            <td>标题</td>
-            <td><input id='item_title' name="title" class="easyui-textbox" data-options="disabled:true" style="width:300px"></td>
+            <td>名称</td>
+            <td><input id='sysinfo_name' name="name" class="easyui-textbox" data-options="disabled:true" style="width:300px"></td>
         </tr>
         <tr>
-            <td>消息类型</td>
-            <td><input id="item_id" name="itemId" data-options="disabled:true"></td>
+            <td>代码</td>
+            <td><input id='sysinfo_syscode' name="syscode" class="easyui-textbox" data-options="disabled:true" style="width:300px"></td>
         </tr>
         <tr>
-            <td>标题图片</td>
-            <td><input id="titleFile" name="titleFile" class="easyui-filebox" style="width:300px" data-options="multiple:false,accept:'image/jpeg'">
-            </td>
+            <td>内容</td>
+            <td><input id='sysinfo_sysvalue' name="sysvalue" class="easyui-textbox" data-options="disabled:true" style="width:300px"></td>
+        </tr>
+        <tr>
+            <td>描述</td>
+            <td><input id='sysinfo_description' name="description" class="easyui-textbox" data-options="disabled:true" style="width:300px"></td>
         </tr>
     </table>
-    <textarea id="container" name="data" type="text/plain" contentEditable="true"></textarea>
 </form>
 
 <!--表单-->

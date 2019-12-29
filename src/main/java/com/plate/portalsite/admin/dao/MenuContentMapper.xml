@@ -50,7 +50,9 @@
     </select>
 
     <select id="getItemContentPage" resultMap="ItemContentResult">
-        select ic.*,a.id a_id,a.servername a_servername from m_itemContent ic
+        select ic.*,a.id a_id,a.servername a_servername,m.title itemName
+        from m_itemContent ic
+        left join m_item  m on m.id  = ic.itemId
         left join m_att a on a.ownId = ic.id
         where 1=1
         <if test="itemId != null">
@@ -159,4 +161,9 @@
             #{pubFlag}
         )
     </insert>
+    <delete id="deleteById">
+
+        delete from m_itemContent
+        where id= #{id}
+    </delete>
 </mapper>
