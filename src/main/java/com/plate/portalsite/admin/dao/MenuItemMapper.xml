@@ -85,6 +85,9 @@
             <if test="data != null">
                 data = #{data},
             </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
         </set>
         where id= #{id}
     </update>

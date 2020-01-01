@@ -27,7 +27,7 @@
         $('#item_id').combobox({
             valueField: 'id',
             textField: 'title',
-            url:ctxPath+"/getContentType"
+            url:ctxPath+"/getContentType?type=content"
         });
         $('#dg').datagrid({
             url:ctxPath+"/getItemContentPage",
@@ -69,6 +69,7 @@
             ue.setEnabled();
         $("#item_title").textbox({"disabled": flag});
         $('#item_id').combobox({"disabled": flag});
+        $('#titleFile').filebox({"disabled": flag});
     }
     function clearForm() {
         $("#formItemContent").form("clear");
@@ -172,7 +173,7 @@
         </tr>
         <tr>
             <td>标题图片</td>
-            <td><input id="titleFile" name="titleFile" class="easyui-filebox" style="width:300px" data-options="multiple:false,accept:'image/jpeg'">
+            <td><input id="titleFile" name="titleFile" class="easyui-filebox" style="width:300px" data-options="disabled:true,multiple:false,accept:'image/jpeg'">
             </td>
         </tr>
     </table>

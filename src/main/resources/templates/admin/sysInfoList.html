@@ -71,9 +71,13 @@
 
         var rows = $("#dg").datagrid("getSelections");
         if(rows.length == 0){
-            $.messager.alert("请选择要删除的行");
+
+            $.messager.alert('info','请选择要删除的行!','info');
             return;
         }
+        if("1" == rows[0].canDel){
+            $.messager.alert('info','选择的行不能被删除!','info');
+            return;        }
         $.messager.confirm('Confirm','确定删除选定的数据吗?',function(r){
             if (r){
                 $.post(ctxPath+"/deleteById",{"id":rows[0].id},function (data) {
